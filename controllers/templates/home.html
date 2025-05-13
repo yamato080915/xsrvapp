@@ -37,14 +37,14 @@
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="/">yamato0915</a>
+			<a class="navbar-brand" href="{{ url_for('home.index').replace('index.cgi/', '') }}">yamato0915</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 				<div class="navbar-nav">
-					<a href="/steam" class="nav-link active">steam</a>
-					<a href="/math" class="nav-link active">math</a>
+					<a href="{{ url_for('steam.home').replace('index.cgi/', '') }}" class="nav-link active">steam</a>
+					<a href="{{ url_for('math.index').replace('index.cgi/', '') }}" class="nav-link active">math</a>
 					<a href="/kyopro" class="nav-link active">kyopro</a>
 					<a href="/flask" class="nav-link active">flask</a>
 				</div>
@@ -59,7 +59,7 @@
 					<div class="card-body">
 						<h5 class="card-title">NikkeiSteam</h5>
 						<p class="card-text"><a href="https://steam.nikkei.com/symposium/20250808/" style="color: #000;">日経STEAM SYMPOSIUM</a>発表用の自走学習援助アプリ</p>
-						<a href="/steam" class="btn btn-success">Go to steam</a>
+						<a href="{{ url_for('steam.home').replace('index.cgi/', '') }}" class="btn btn-success">Go to steam</a>
 					</div>
 				</div>
 			</div>
@@ -68,7 +68,7 @@
 					<div class="card-body">
 						<h5 class="card-title">Math Project</h5>
 						<p class="card-text">LaTeXコードからリアルタイムで数式を表示します</p>
-						<a href="/math" class="btn btn-success">Go to math</a>
+						<a href="{{ url_for('math.index').replace('index.cgi/', '') }}" class="btn btn-success">Go to math</a>
 					</div>
 				</div>
 			</div>

@@ -1,0 +1,2 @@
+class main(object):
+	SQLALCHEMY_TRACK_MODIFICATIONS=False

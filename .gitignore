@@ -1,0 +1,7 @@
+migrations/
+.env
+*.db
+Pipfile
+Pipfile.lock
+controllers/math/
+controllers/steam/

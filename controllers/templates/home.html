@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css2?family=Squada+One&display=swap" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3"></script>
+	<script src="https://cdn.jsdelivr.net/npm/date-fns@3.6.0/index.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<style>
+		.compressed-text {
+			white-space: nowrap;
+			overflow: hidden;
+			display: inline-block;
+		}
+		.gray {color: gray;}
+		.brown {color: #804000;}
+		.green {color: #008000;}
+		.cyan {color: #00c0c0;}
+		.blue {color: blue;}
+		.yellow {color: #c0c000;}
+		.orange {color: #ff8000;}
+		.red {color: #ff0000;}
+		.ratingf {
+			font-family: "Squada One";
+		}
+		* {
+			font-family: system-ui;
+		}
+	</style>
+	<title>
+		Welcome
+	</title>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/">yamato0915</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+				<div class="navbar-nav">
+					<a href="/steam" class="nav-link active">steam</a>
+					<a href="/math" class="nav-link active">math</a>
+					<a href="/kyopro" class="nav-link active">kyopro</a>
+					<a href="/flask" class="nav-link active">flask</a>
+				</div>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container mt-5">
+		<div class="row justify-content-center">
+			<div class="col-md-5 mb-4">
+				<div class="card shadow-sm">
+					<div class="card-body">
+						<h5 class="card-title">NikkeiSteam</h5>
+						<p class="card-text"><a href="https://steam.nikkei.com/symposium/20250808/" style="color: #000;">日経STEAM SYMPOSIUM</a>発表用の自走学習援助アプリ</p>
+						<a href="/steam" class="btn btn-success">Go to steam</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-5 mb-4">
+				<div class="card shadow-sm">
+					<div class="card-body">
+						<h5 class="card-title">Math Project</h5>
+						<p class="card-text">LaTeXコードからリアルタイムで数式を表示します</p>
+						<a href="/math" class="btn btn-success">Go to math</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container mt-5">
+		<h4 class="text-center mb-4">アカウント</h4>
+		<div class="row justify-content-center">
+			<div class="col-md-5 mb-4">
+				<div class="card shadow-sm">
+					<div class="card-body">
+						<h5 class="card-title">GitHub</h5>
+						<a href="https://github.com/yamato080915" target="_blank" class="btn btn-dark me-2">
+							<i class="bi bi-github"></i> @yamato080915
+						</a>
+						<div class="ratio ratio-4x3">
+							<img src="https://github-readme-stats.vercel.app/api?username=yamato080915&show_icons=true&theme=default" class="img-fluid  mt-3" alt="GitHub Stats">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-5 mb-4">
+				<div class="card shadow-sm">
+					<div class="card-body">
+						<h5 class="card-title">AtCoder</h5>
+						<a href="https://atcoder.jp/users/yamato0915" target="_blank" class="btn btn-primary me-2">
+							@yamato0915
+						</a>
+						<div class="border rounded shadow-sm p-2 d-flex align-items-center mt-3" style="max-width: 600px;">
+							<div class="fs-1 mx-2 {{ data[-1]['Rank'] }} ratingf" id="rating">{{ data[-1]["NewRating"] }}</div>
+							<div class="text-center mx-2">
+								<div class="small" id="place">{{ data[-1]["Place"] }}{% if data[-1]["Place"][-1]=="1" %}st{% elif data[-1]["Place"][-1]=="2" %}nd{% elif data[-1]["Place"][-1]=="3" %}rd{% else %}th{% endif %}</div>
+								<div class="text-muted small" id="diff">{% if data[-1]["NewRating"] - data[-1]["OldRating"]>0 %}+{% elif data[-1]["NewRating"] - data[-1]["OldRating"]==0 %}±{% endif %}{{ data[-1]["NewRating"] - data[-1]["OldRating"] }}</div>
+							</div>
+							<div class="text-start mx-2">
+								<div class="small" id="endtime">{{ data[-1]["EndTime"] }}</div>
+								<div class="fw-semibold fs-5 compressed-text" id="contestname">{{ data[-1]["ContestName"] }}</div>
+							</div>
+						</div>
+						<div class="ratio ratio-16x9">
+							<canvas class="mt-3" id="ratingChart" width="800" height="450"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		function adjustScale() {
+			const contestname = document.getElementById("contestname");
+			contestname.style.whiteSpace = "normal";
+			width = contestname.offsetWidth;
+			contestname.style.whiteSpace = "nowrap";
+			width2 = contestname.offsetWidth;
+			scale = width/width2;
+			console.log(scale);
+			contestname.style.transform = `scaleX(${scale})`;
+			contestname.style.transformOrigin = 'left';
+		}
+		window.addEventListener("load", adjustScale);
+		window.addEventListener("resize", adjustScale);
+	</script>
+
+	<script>
+		fetch('/api/rating')
+		.then(response => response.json())
+		.then(data => {
+			const ratings = data.map(contest => contest.NewRating);
+			const dates = data.map(contest => new Date(contest.EndTime));
+
+			const firstDate = new Date(dates[0]);
+			firstDate.setMonth(firstDate.getMonth() - 1);
+
+			const lastDate = new Date(dates[dates.length - 1]);
+			lastDate.setMonth(lastDate.getMonth() + 1);
+
+			const maxRating = Math.max(...ratings);
+			const yMax = Math.ceil((maxRating + 100) / 200) * 200;
+
+			const ctx = document.getElementById('ratingChart').getContext('2d');
+
+			const backgroundColors = [
+				{ color: 'rgba(128,128,128,0.3)', max: 399 },
+				{ color: 'rgba(128,64,0,0.3)', max: 799 },
+				{ color: 'rgba(0,128,0,0.3)', max: 1199 },
+				{ color: 'rgba(0,192,192,0.3)', max: 1599 },
+				{ color: 'rgba(0,0,255,0.3)', max: 1999 },
+				{ color: 'rgba(192,192,0,0.3)', max: 2399 },
+				{ color: 'rgba(255,128,0,0.3)', max: 2799 },
+				{ color: 'rgba(255,0,0,0.3)', max: 9999 }
+			];
+
+			const plugin = {
+				id: 'rankBackground',
+				beforeDraw: chart => {
+					const { ctx, chartArea: { top, bottom, left, right }, scales: { y } } = chart;
+					backgroundColors.forEach(({ color, max }, i) => {
+						const min = i === 0 ? y.min : backgroundColors[i - 1].max + 1;
+						const yTop = y.getPixelForValue(Math.min(max, yMax));
+						const yBottom = y.getPixelForValue(min);
+						ctx.save();
+						ctx.beginPath();
+						ctx.rect(left, top, right - left, bottom - top);
+						ctx.clip();
+						ctx.fillStyle = color;
+						ctx.fillRect(left, yTop, right - left, yBottom - yTop);
+						ctx.restore();
+					});
+				}
+			};
+
+			new Chart(ctx, {
+				type: 'line',
+				data: {
+					labels: dates,
+					datasets: [{
+						//label: 'AtCoder Rating',
+						data: dates.map((d, i) => ({ x: d, y: ratings[i] })),
+						borderColor: '#606060',
+						backgroundColor: "white",
+						fill: false,
+						tension: 0.1,
+						pointRadius: 3,
+						pointHoverRadius: 5
+					}]
+				},
+				options: {
+					responsive: true,
+					plugins: {
+						legend: {
+							display: false
+						}
+					},
+					scales: {
+						x: {
+							type: 'time',
+							time: {
+								unit: 'month',
+								tooltipFormat: 'MMM yyyy',
+								displayFormats: {
+									month: 'MMM yyyy'
+								}
+							},
+							min: firstDate,
+							max: lastDate,
+							title: {
+								display: false,
+								text: 'Date'
+							},
+							grid: {
+								color: 'rgba(255,255,255,0.3)'
+							}
+						},
+						y: {
+							beginAtZero: true,
+							min: 0,
+							max: yMax,
+							title: {
+								display: false,
+								text: 'Rating'
+							},
+							ticks: {
+								stepSize: 400,
+								callback: function(value) {
+									const rankBoundaries = [400, 800, 1200, 1600, 2000, 2400, 2800];
+									return rankBoundaries.includes(value) ? value : '';
+								}
+							},
+							grid: {
+								color: 'rgba(255,255,255,0.3)'
+							}
+						}
+					},
+					onHover: (event, chartElement) => {
+						const rating = document.getElementById("rating");
+						const place = document.getElementById("place");
+						const diff = document.getElementById("diff");
+						const date = document.getElementById("endtime");
+						const contestname = document.getElementById("contestname");
+						if (chartElement && chartElement.length > 0) {
+							const index = chartElement[0].index;
+							const dataPoint = data[index];
+							rating.innerText = dataPoint["NewRating"];
+							if (String(dataPoint["Place"]).slice(-1)==1) {
+								place.innerText = dataPoint["Place"] + "st";
+							} else if (String(dataPoint["Place"]).slice(-1)==2) {
+								place.innerText = dataPoint["Place"] + "nd";
+							} else if (String(dataPoint["Place"]).slice(-1)==3) {
+								place.innerText = dataPoint["Place"] + "rd";
+							} else {
+								place.innerText = dataPoint["Place"] + "th";
+							}
+							if (dataPoint["NewRating"] - dataPoint["OldRating"]>0) {
+								diff.innerText = "+" + String(dataPoint["NewRating"] - dataPoint["OldRating"]);
+							} else {
+								diff.innerText = String(dataPoint["NewRating"] - dataPoint["OldRating"]);
+							}
+							date.innerText = dataPoint["EndTime"];
+							contestname.innerText = dataPoint["ContestName"];
+							//ここから長体を調整
+							adjustScale();
+						}
+					}
+				},
+				plugins: [plugin]
+			});
+		});
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

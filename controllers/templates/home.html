@@ -296,6 +296,150 @@
 			});
 		});
 	</script>
+	<script>
+		fetch('/api/omc/rating')
+		.then(response => response.json())
+		.then(data => {
+			const ratings = data.map(contest => contest.NewRating);
+			const dates = data.map(contest => new Date(contest.EndTime));
+
+			const firstDate = new Date(dates[0]);
+			firstDate.setMonth(firstDate.getMonth() - 1);
+
+			const lastDate = new Date(dates[dates.length - 1]);
+			lastDate.setMonth(lastDate.getMonth() + 1);
+
+			const maxRating = Math.max(...ratings);
+			const yMax = Math.ceil((maxRating + 100) / 200) * 200;
+
+			const ctx = document.getElementById('omcRating').getContext('2d');
+
+			const backgroundColors = [
+				{ color: 'rgba(128,128,128,0.3)', max: 399 },
+				{ color: 'rgba(128,64,0,0.3)', max: 799 },
+				{ color: 'rgba(0,128,0,0.3)', max: 1199 },
+				{ color: 'rgba(0,192,192,0.3)', max: 1599 },
+				{ color: 'rgba(0,0,255,0.3)', max: 1999 },
+				{ color: 'rgba(192,192,0,0.3)', max: 2399 },
+				{ color: 'rgba(255,128,0,0.3)', max: 2799 },
+				{ color: 'rgba(255,0,0,0.3)', max: 9999 }
+			];
+
+			const plugin = {
+				id: 'rankBackground',
+				beforeDraw: chart => {
+					const { ctx, chartArea: { top, bottom, left, right }, scales: { y } } = chart;
+					backgroundColors.forEach(({ color, max }, i) => {
+						const min = i === 0 ? y.min : backgroundColors[i - 1].max + 1;
+						const yTop = y.getPixelForValue(Math.min(max, yMax));
+						const yBottom = y.getPixelForValue(min);
+						ctx.save();
+						ctx.beginPath();
+						ctx.rect(left, top, right - left, bottom - top);
+						ctx.clip();
+						ctx.fillStyle = color;
+						ctx.fillRect(left, yTop, right - left, yBottom - yTop);
+						ctx.restore();
+					});
+				}
+			};
+
+			new Chart(ctx, {
+				type: 'line',
+				data: {
+					labels: dates,
+					datasets: [{
+						//label: 'OMC Rating',
+						data: dates.map((d, i) => ({ x: d, y: ratings[i] })),
+						borderColor: '#606060',
+						backgroundColor: "white",
+						fill: false,
+						tension: 0.1,
+						pointRadius: 3,
+						pointHoverRadius: 5
+					}]
+				},
+				options: {
+					responsive: true,
+					plugins: {
+						legend: {
+							display: false
+						}
+					},
+					scales: {
+						x: {
+							type: 'time',
+							time: {
+								unit: 'month',
+								tooltipFormat: 'MMM yyyy',
+								displayFormats: {
+									month: 'MMM yyyy'
+								}
+							},
+							min: firstDate,
+							max: lastDate,
+							title: {
+								display: false,
+								text: 'Date'
+							},
+							grid: {
+								color: 'rgba(255,255,255,0.3)'
+							}
+						},
+						y: {
+							beginAtZero: true,
+							min: 0,
+							max: yMax,
+							title: {
+								display: false,
+								text: 'Rating'
+							},
+							ticks: {
+								stepSize: 400,
+								callback: function(value) {
+									const rankBoundaries = [400, 800, 1200, 1600, 2000, 2400, 2800];
+									return rankBoundaries.includes(value) ? value : '';
+								}
+							},
+							grid: {
+								color: 'rgba(255,255,255,0.3)'
+							}
+						}
+					},
+					onHover: (event, chartElement) => {
+						const rating = document.getElementById("rating");
+						const place = document.getElementById("place");
+						const diff = document.getElementById("diff");
+						const date = document.getElementById("endtime");
+						const contestname = document.getElementById("contestname");
+						if (chartElement && chartElement.length > 0) {
+							const index = chartElement[0].index;
+							const dataPoint = data[index];
+							rating.innerText = dataPoint["NewRating"];
+							if (String(dataPoint["Place"]).slice(-1)==1) {
+								place.innerText = dataPoint["Place"] + "st";
+							} else if (String(dataPoint["Place"]).slice(-1)==2) {
+								place.innerText = dataPoint["Place"] + "nd";
+							} else if (String(dataPoint["Place"]).slice(-1)==3) {
+								place.innerText = dataPoint["Place"] + "rd";
+							} else {
+								place.innerText = dataPoint["Place"] + "th";
+							}
+							if (dataPoint["NewRating"] - atcoderPoint["OldRating"]>0) {
+								diff.innerText = "+" + String(dataPoint["NewRating"] - atcoderPoint["OldRating"]);
+							} else {
+								diff.innerText = String(dataPoint["NewRating"] - atcoderPoint["OldRating"]);
+							}
+							date.innerText = dataPoint["EndTime"];
+							contestname.innerText = dataPoint["ContestName"];
+							//ここから長体を調整
+						}
+					}
+				},
+				plugins: [plugin]
+			});
+		});
+	</script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>

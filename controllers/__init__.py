@@ -4,8 +4,8 @@ from datetime import datetime
 
 home = Blueprint("home", __name__, static_folder="static", template_folder="templates")
 
-def get():
-	with open("./atcoder.json", "r", encoding="utf-8") as f:
+def get(file):
+	with open(file, "r", encoding="utf-8") as f:
 		data = f.read()
 		data = json.loads(data)
 
@@ -26,10 +26,16 @@ def get():
 
 @home.route("/")
 def index():
-	data = get()
-	return render_template("home.html", data=data)
+	atcoder = get("./atcoder.json")
+	omc = get("./omc.json")
+	return render_template("home.html", atcoder=atcoder, omc=omc)
 
-@home.route(f"/api/rating")
-def ApiRating():
-	data = get()
+@home.route(f"/api/atcoder/rating")
+def AtcoderRating():
+	data = get("./atcoder.json")
+	return jsonify(data)
+
+@home.route(f"api/omc/rating")
+def omcRating():
+	data = get("./omc.json")
 	return jsonify(data)

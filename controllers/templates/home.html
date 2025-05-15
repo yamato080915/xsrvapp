@@ -159,22 +159,6 @@
 		window.addEventListener("resize", adjustScale);
 	</script>
 	<script>
-		function adjustScale() {
-			const contestname = document.getElementById("omccontestname");
-			contestname.style.whiteSpace = "normal";
-			width = contestname.offsetWidth;
-			contestname.style.whiteSpace = "nowrap";
-			width2 = contestname.offsetWidth;
-			scale = width/width2;
-			console.log(scale);
-			contestname.style.transform = `scaleX(${scale})`;
-			contestname.style.transformOrigin = 'left';
-		}
-		window.addEventListener("load", adjustScale);
-		window.addEventListener("resize", adjustScale);
-	</script>
-
-	<script>
 		fetch('/api/atcoder/rating')
 		.then(response => response.json())
 		.then(data => {
@@ -313,10 +297,10 @@
 							} else {
 								place.innerText = dataPoint["Place"] + "th";
 							}
-							if (dataPoint["NewRating"] - atcoderPoint["OldRating"]>0) {
-								diff.innerText = "+" + String(dataPoint["NewRating"] - atcoderPoint["OldRating"]);
+							if (dataPoint["NewRating"] - dataPoint["OldRating"]>0) {
+								diff.innerText = "+" + String(dataPoint["NewRating"] - dataPoint["OldRating"]);
 							} else {
-								diff.innerText = String(dataPoint["NewRating"] - atcoderPoint["OldRating"]);
+								diff.innerText = String(dataPoint["NewRating"] - dataPoint["OldRating"]);
 							}
 							date.innerText = dataPoint["EndTime"];
 							contestname.innerText = dataPoint["ContestName"];
@@ -476,6 +460,7 @@
 							date.innerText = dataPoint["EndTime"];
 							contestname.innerText = dataPoint["ContestName"];
 							//ここから長体を調整
+
 						}
 					}
 				},

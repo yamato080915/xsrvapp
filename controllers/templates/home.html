@@ -179,6 +179,7 @@
 		.then(response => response.json())
 		.then(data => {
 			const ratings = data.map(contest => contest.NewRating);
+			const performances = data.map(contest => contest.Performance);
 			const dates = data.map(contest => new Date(contest.EndTime));
 
 			const firstDate = new Date(dates[0]);
@@ -187,8 +188,8 @@
 			const lastDate = new Date(dates[dates.length - 1]);
 			lastDate.setMonth(lastDate.getMonth() + 1);
 
-			const maxRating = Math.max(...ratings);
-			const yMax = Math.ceil((maxRating + 100) / 200) * 200;
+			const Max = Math.max(...ratings.concat(performances))
+			const yMax = Math.ceil((Max + 100) / 200) * 200;
 
 			const ctx = document.getElementById('ratingChart').getContext('2d');
 
@@ -227,7 +228,7 @@
 				data: {
 					labels: dates,
 					datasets: [{
-						//label: 'AtCoder Rating',
+						label: 'Rating',
 						data: dates.map((d, i) => ({ x: d, y: ratings[i] })),
 						borderColor: '#606060',
 						backgroundColor: "white",
@@ -235,13 +236,22 @@
 						tension: 0.1,
 						pointRadius: 3,
 						pointHoverRadius: 5
+					},{
+						label: 'Performance',
+						data: dates.map((d, i) => ({ x: d, y: performances[i] })),
+						borderColor: '#909090',
+						backgroundColor: "#909090",
+						fill: false,
+						tension: 0.1,
+						pointRadius: 2,
+						pointHoverRadius: 5
 					}]
 				},
 				options: {
 					responsive: true,
 					plugins: {
 						legend: {
-							display: false
+							display: true
 						}
 					},
 					scales: {
@@ -324,6 +334,7 @@
 		.then(response => response.json())
 		.then(data => {
 			const ratings = data.map(contest => contest.NewRating);
+			const performances = data.map(contest => contest.Performance);
 			const dates = data.map(contest => new Date(contest.EndTime));
 
 			const firstDate = new Date(dates[0]);
@@ -332,8 +343,8 @@
 			const lastDate = new Date(dates[dates.length - 1]);
 			lastDate.setMonth(lastDate.getMonth() + 1);
 
-			const maxRating = Math.max(...ratings);
-			const yMax = Math.ceil((maxRating + 100) / 200) * 200;
+			const Max = Math.max(...ratings.concat(performances))
+			const yMax = Math.ceil((Max + 100) / 200) * 200;
 
 			const ctx = document.getElementById('omcRating').getContext('2d');
 
@@ -372,7 +383,7 @@
 				data: {
 					labels: dates,
 					datasets: [{
-						//label: 'OMC Rating',
+						label: 'Rating',
 						data: dates.map((d, i) => ({ x: d, y: ratings[i] })),
 						borderColor: '#606060',
 						backgroundColor: "white",
@@ -380,13 +391,22 @@
 						tension: 0.1,
 						pointRadius: 3,
 						pointHoverRadius: 5
+					},{
+						label: 'Performance',
+						data: dates.map((d, i) => ({ x: d, y: performances[i] })),
+						borderColor: '#909090',
+						backgroundColor: "#909090",
+						fill: false,
+						tension: 0.1,
+						pointRadius: 2,
+						pointHoverRadius: 5
 					}]
 				},
 				options: {
 					responsive: true,
 					plugins: {
 						legend: {
-							display: false
+							display: true
 						}
 					},
 					scales: {

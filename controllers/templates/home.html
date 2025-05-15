@@ -8,6 +8,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3"></script>
 	<script src="https://cdn.jsdelivr.net/npm/date-fns@3.6.0/index.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<style>
 		.compressed-text {
@@ -157,316 +158,165 @@
 		}
 		window.addEventListener("load", adjustScale);
 		window.addEventListener("resize", adjustScale);
-	</script>
-	<script>
-		fetch('/api/atcoder/rating')
-		.then(response => response.json())
-		.then(data => {
-			const ratings = data.map(contest => contest.NewRating);
-			const performances = data.map(contest => contest.Performance);
-			const dates = data.map(contest => new Date(contest.EndTime));
+	
+		function createRatingChart(url, chart_id, rating_id, place_id, diff_id, endtime_id, contestname_id) {
+			console.log(url, chart_id, rating_id, place_id, diff_id, endtime_id, contestname_id)
+			fetch(url)
+			.then(response => response.json())
+			.then(data => {
+				const ratings = data.map(contest => contest.NewRating);
+				const performances = data.map(contest => contest.Performance);
+				const dates = data.map(contest => new Date(contest.EndTime));
 
-			const firstDate = new Date(dates[0]);
-			firstDate.setMonth(firstDate.getMonth() - 1);
+				const firstDate = new Date(dates[0]);
+				firstDate.setMonth(firstDate.getMonth() - 1);
 
-			const lastDate = new Date(dates[dates.length - 1]);
-			lastDate.setMonth(lastDate.getMonth() + 1);
+				const lastDate = new Date(dates[dates.length - 1]);
+				lastDate.setMonth(lastDate.getMonth() + 1);
 
-			const Max = Math.max(...ratings.concat(performances))
-			const yMax = Math.ceil((Max + 100) / 200) * 200;
+				const Max = Math.max(...ratings.concat(performances))
+				const yMax = Math.ceil((Max + 100) / 200) * 200;
 
-			const ctx = document.getElementById('ratingChart').getContext('2d');
+				const ctx = document.getElementById(chart_id).getContext('2d');
 
-			const backgroundColors = [
-				{ color: 'rgba(128,128,128,0.3)', max: 399 },
-				{ color: 'rgba(128,64,0,0.3)', max: 799 },
-				{ color: 'rgba(0,128,0,0.3)', max: 1199 },
-				{ color: 'rgba(0,192,192,0.3)', max: 1599 },
-				{ color: 'rgba(0,0,255,0.3)', max: 1999 },
-				{ color: 'rgba(192,192,0,0.3)', max: 2399 },
-				{ color: 'rgba(255,128,0,0.3)', max: 2799 },
-				{ color: 'rgba(255,0,0,0.3)', max: 9999 }
-			];
+				const backgroundColors = [
+					{ color: 'rgba(128,128,128,0.3)', max: 399 },
+					{ color: 'rgba(128,64,0,0.3)', max: 799 },
+					{ color: 'rgba(0,128,0,0.3)', max: 1199 },
+					{ color: 'rgba(0,192,192,0.3)', max: 1599 },
+					{ color: 'rgba(0,0,255,0.3)', max: 1999 },
+					{ color: 'rgba(192,192,0,0.3)', max: 2399 },
+					{ color: 'rgba(255,128,0,0.3)', max: 2799 },
+					{ color: 'rgba(255,0,0,0.3)', max: 9999 }
+				];
 
-			const plugin = {
-				id: 'rankBackground',
-				beforeDraw: chart => {
-					const { ctx, chartArea: { top, bottom, left, right }, scales: { y } } = chart;
-					backgroundColors.forEach(({ color, max }, i) => {
-						const min = i === 0 ? y.min : backgroundColors[i - 1].max + 1;
-						const yTop = y.getPixelForValue(Math.min(max, yMax));
-						const yBottom = y.getPixelForValue(min);
-						ctx.save();
-						ctx.beginPath();
-						ctx.rect(left, top, right - left, bottom - top);
-						ctx.clip();
-						ctx.fillStyle = color;
-						ctx.fillRect(left, yTop, right - left, yBottom - yTop);
-						ctx.restore();
-					});
-				}
-			};
+				const plugin = {
+					id: 'rankBackground',
+					beforeDraw: chart => {
+						const { ctx, chartArea: { top, bottom, left, right }, scales: { y } } = chart;
+						backgroundColors.forEach(({ color, max }, i) => {
+							const min = i === 0 ? y.min : backgroundColors[i - 1].max + 1;
+							const yTop = y.getPixelForValue(Math.min(max, yMax));
+							const yBottom = y.getPixelForValue(min);
+							ctx.save();
+							ctx.beginPath();
+							ctx.rect(left, top, right - left, bottom - top);
+							ctx.clip();
+							ctx.fillStyle = color;
+							ctx.fillRect(left, yTop, right - left, yBottom - yTop);
+							ctx.restore();
+						});
+					}
+				};
 
-			new Chart(ctx, {
-				type: 'line',
-				data: {
-					labels: dates,
-					datasets: [{
-						label: 'Rating',
-						data: dates.map((d, i) => ({ x: d, y: ratings[i] })),
-						borderColor: '#606060',
-						backgroundColor: "white",
-						fill: false,
-						tension: 0.1,
-						pointRadius: 3,
-						pointHoverRadius: 5
-					},{
-						label: 'Performance',
-						data: dates.map((d, i) => ({ x: d, y: performances[i] })),
-						borderColor: '#909090',
-						backgroundColor: "#909090",
-						fill: false,
-						tension: 0.1,
-						pointRadius: 2,
-						pointHoverRadius: 5
-					}]
-				},
-				options: {
-					responsive: true,
-					plugins: {
-						legend: {
-							display: true
-						}
+				new Chart(ctx, {
+					type: 'line',
+					data: {
+						labels: dates,
+						datasets: [{
+							label: 'Rating',
+							data: dates.map((d, i) => ({ x: d, y: ratings[i] })),
+							borderColor: '#606060',
+							backgroundColor: "white",
+							fill: false,
+							tension: 0.1,
+							pointRadius: 3,
+							pointHoverRadius: 5
+						},{
+							label: 'Performance',
+							data: dates.map((d, i) => ({ x: d, y: performances[i] })),
+							borderColor: '#909090',
+							backgroundColor: "#909090",
+							fill: false,
+							tension: 0.1,
+							pointRadius: 2,
+							pointHoverRadius: 5
+						}]
 					},
-					scales: {
-						x: {
-							type: 'time',
-							time: {
-								unit: 'month',
-								tooltipFormat: 'MMM yyyy',
-								displayFormats: {
-									month: 'MMM yyyy'
-								}
-							},
-							min: firstDate,
-							max: lastDate,
-							title: {
-								display: false,
-								text: 'Date'
-							},
-							grid: {
-								color: 'rgba(255,255,255,0.3)'
+					options: {
+						responsive: true,
+						plugins: {
+							legend: {
+								display: true
 							}
 						},
-						y: {
-							beginAtZero: true,
-							min: 0,
-							max: yMax,
-							title: {
-								display: false,
-								text: 'Rating'
-							},
-							ticks: {
-								stepSize: 400,
-								callback: function(value) {
-									const rankBoundaries = [400, 800, 1200, 1600, 2000, 2400, 2800];
-									return rankBoundaries.includes(value) ? value : '';
+						scales: {
+							x: {
+								type: 'time',
+								time: {
+									unit: 'month',
+									tooltipFormat: 'MMM yyyy',
+									displayFormats: {
+										month: 'MMM yyyy'
+									}
+								},
+								min: firstDate,
+								max: lastDate,
+								title: {
+									display: false,
+									text: 'Date'
+								},
+								grid: {
+									color: 'rgba(255,255,255,0.3)'
 								}
 							},
-							grid: {
-								color: 'rgba(255,255,255,0.3)'
-							}
-						}
-					},
-					onHover: (event, chartElement) => {
-						const rating = document.getElementById("rating");
-						const place = document.getElementById("place");
-						const diff = document.getElementById("diff");
-						const date = document.getElementById("endtime");
-						const contestname = document.getElementById("contestname");
-						if (chartElement && chartElement.length > 0) {
-							const index = chartElement[0].index;
-							const dataPoint = data[index];
-							rating.innerText = dataPoint["NewRating"];
-							if (String(dataPoint["Place"]).slice(-1)==1) {
-								place.innerText = dataPoint["Place"] + "st";
-							} else if (String(dataPoint["Place"]).slice(-1)==2) {
-								place.innerText = dataPoint["Place"] + "nd";
-							} else if (String(dataPoint["Place"]).slice(-1)==3) {
-								place.innerText = dataPoint["Place"] + "rd";
-							} else {
-								place.innerText = dataPoint["Place"] + "th";
-							}
-							if (dataPoint["NewRating"] - dataPoint["OldRating"]>0) {
-								diff.innerText = "+" + String(dataPoint["NewRating"] - dataPoint["OldRating"]);
-							} else {
-								diff.innerText = String(dataPoint["NewRating"] - dataPoint["OldRating"]);
-							}
-							date.innerText = dataPoint["EndTime"];
-							contestname.innerText = dataPoint["ContestName"];
-							//ここから長体を調整
-							adjustScale();
-						}
-					}
-				},
-				plugins: [plugin]
-			});
-		});
-	</script>
-	<script>
-		fetch('/api/omc/rating')
-		.then(response => response.json())
-		.then(data => {
-			const ratings = data.map(contest => contest.NewRating);
-			const performances = data.map(contest => contest.Performance);
-			const dates = data.map(contest => new Date(contest.EndTime));
-
-			const firstDate = new Date(dates[0]);
-			firstDate.setMonth(firstDate.getMonth() - 1);
-
-			const lastDate = new Date(dates[dates.length - 1]);
-			lastDate.setMonth(lastDate.getMonth() + 1);
-
-			const Max = Math.max(...ratings.concat(performances))
-			const yMax = Math.ceil((Max + 100) / 200) * 200;
-
-			const ctx = document.getElementById('omcRating').getContext('2d');
-
-			const backgroundColors = [
-				{ color: 'rgba(128,128,128,0.3)', max: 399 },
-				{ color: 'rgba(128,64,0,0.3)', max: 799 },
-				{ color: 'rgba(0,128,0,0.3)', max: 1199 },
-				{ color: 'rgba(0,192,192,0.3)', max: 1599 },
-				{ color: 'rgba(0,0,255,0.3)', max: 1999 },
-				{ color: 'rgba(192,192,0,0.3)', max: 2399 },
-				{ color: 'rgba(255,128,0,0.3)', max: 2799 },
-				{ color: 'rgba(255,0,0,0.3)', max: 9999 }
-			];
-
-			const plugin = {
-				id: 'rankBackground',
-				beforeDraw: chart => {
-					const { ctx, chartArea: { top, bottom, left, right }, scales: { y } } = chart;
-					backgroundColors.forEach(({ color, max }, i) => {
-						const min = i === 0 ? y.min : backgroundColors[i - 1].max + 1;
-						const yTop = y.getPixelForValue(Math.min(max, yMax));
-						const yBottom = y.getPixelForValue(min);
-						ctx.save();
-						ctx.beginPath();
-						ctx.rect(left, top, right - left, bottom - top);
-						ctx.clip();
-						ctx.fillStyle = color;
-						ctx.fillRect(left, yTop, right - left, yBottom - yTop);
-						ctx.restore();
-					});
-				}
-			};
-
-			new Chart(ctx, {
-				type: 'line',
-				data: {
-					labels: dates,
-					datasets: [{
-						label: 'Rating',
-						data: dates.map((d, i) => ({ x: d, y: ratings[i] })),
-						borderColor: '#606060',
-						backgroundColor: "white",
-						fill: false,
-						tension: 0.1,
-						pointRadius: 3,
-						pointHoverRadius: 5
-					},{
-						label: 'Performance',
-						data: dates.map((d, i) => ({ x: d, y: performances[i] })),
-						borderColor: '#909090',
-						backgroundColor: "#909090",
-						fill: false,
-						tension: 0.1,
-						pointRadius: 2,
-						pointHoverRadius: 5
-					}]
-				},
-				options: {
-					responsive: true,
-					plugins: {
-						legend: {
-							display: true
-						}
-					},
-					scales: {
-						x: {
-							type: 'time',
-							time: {
-								unit: 'month',
-								tooltipFormat: 'MMM yyyy',
-								displayFormats: {
-									month: 'MMM yyyy'
+							y: {
+								beginAtZero: true,
+								min: 0,
+								max: yMax,
+								title: {
+									display: false,
+									text: 'Rating'
+								},
+								ticks: {
+									stepSize: 400,
+									callback: function(value) {
+										const rankBoundaries = [400, 800, 1200, 1600, 2000, 2400, 2800];
+										return rankBoundaries.includes(value) ? value : '';
+									}
+								},
+								grid: {
+									color: 'rgba(255,255,255,0.3)'
 								}
-							},
-							min: firstDate,
-							max: lastDate,
-							title: {
-								display: false,
-								text: 'Date'
-							},
-							grid: {
-								color: 'rgba(255,255,255,0.3)'
 							}
 						},
-						y: {
-							beginAtZero: true,
-							min: 0,
-							max: yMax,
-							title: {
-								display: false,
-								text: 'Rating'
-							},
-							ticks: {
-								stepSize: 400,
-								callback: function(value) {
-									const rankBoundaries = [400, 800, 1200, 1600, 2000, 2400, 2800];
-									return rankBoundaries.includes(value) ? value : '';
+						onHover: (event, chartElement) => {
+							const rating = document.getElementById(rating_id);
+							const place = document.getElementById(place_id);
+							const diff = document.getElementById(diff_id);
+							const date = document.getElementById(endtime_id);
+							const contestname = document.getElementById(contestname_id);
+							if (chartElement && chartElement.length > 0) {
+								const index = chartElement[0].index;
+								const dataPoint = data[index];
+								rating.innerText = dataPoint["NewRating"];
+								if (String(dataPoint["Place"]).slice(-1)==1) {
+									place.innerText = dataPoint["Place"] + "st";
+								} else if (String(dataPoint["Place"]).slice(-1)==2) {
+									place.innerText = dataPoint["Place"] + "nd";
+								} else if (String(dataPoint["Place"]).slice(-1)==3) {
+									place.innerText = dataPoint["Place"] + "rd";
+								} else {
+									place.innerText = dataPoint["Place"] + "th";
 								}
-							},
-							grid: {
-								color: 'rgba(255,255,255,0.3)'
+								if (dataPoint["NewRating"] - dataPoint["OldRating"]>0) {
+									diff.innerText = "+" + String(dataPoint["NewRating"] - dataPoint["OldRating"]);
+								} else {
+									diff.innerText = String(dataPoint["NewRating"] - dataPoint["OldRating"]);
+								}
+								date.innerText = dataPoint["EndTime"];
+								contestname.innerText = dataPoint["ContestName"];
+								//ここから長体を調整
+								adjustScale();
 							}
 						}
 					},
-					onHover: (event, chartElement) => {
-						const rating = document.getElementById("omcrating");
-						const place = document.getElementById("omcplace");
-						const diff = document.getElementById("omcdiff");
-						const date = document.getElementById("omcendtime");
-						const contestname = document.getElementById("omccontestname");
-						if (chartElement && chartElement.length > 0) {
-							const index = chartElement[0].index;
-							const dataPoint = data[index];
-							rating.innerText = dataPoint["NewRating"];
-							if (String(dataPoint["Place"]).slice(-1)==1) {
-								place.innerText = dataPoint["Place"] + "st";
-							} else if (String(dataPoint["Place"]).slice(-1)==2) {
-								place.innerText = dataPoint["Place"] + "nd";
-							} else if (String(dataPoint["Place"]).slice(-1)==3) {
-								place.innerText = dataPoint["Place"] + "rd";
-							} else {
-								place.innerText = dataPoint["Place"] + "th";
-							}
-							if (dataPoint["NewRating"] - atcoderPoint["OldRating"]>0) {
-								diff.innerText = "+" + String(dataPoint["NewRating"] - atcoderPoint["OldRating"]);
-							} else {
-								diff.innerText = String(dataPoint["NewRating"] - atcoderPoint["OldRating"]);
-							}
-							date.innerText = dataPoint["EndTime"];
-							contestname.innerText = dataPoint["ContestName"];
-							//ここから長体を調整
-
-						}
-					}
-				},
-				plugins: [plugin]
+					plugins: [plugin]
+				});
 			});
-		});
+		}
+		createRatingChart("/api/atcoder/rating", "ratingChart", "rating", "place", "diff", "endtime", "contestname");
+		createRatingChart("/api/omc/rating", "omcRating", "omcrating", "omcplace", "omcdiff", "omcendtime", "omccontestname");
 	</script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>

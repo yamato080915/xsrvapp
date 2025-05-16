@@ -1,4 +1,9 @@
 from app import app, login_manager
+from models import User
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 from controllers import home
 app.register_blueprint(home, url_prefix="/")

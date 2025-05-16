@@ -6,6 +6,7 @@ import random, os
 
 from app import db, mail
 from models import User, Auth
+from www import load_user
 
 account = Blueprint(
 	"account", 

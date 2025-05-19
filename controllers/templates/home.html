@@ -151,7 +151,6 @@
 			contestname.style.whiteSpace = "nowrap";
 			width2 = contestname.offsetWidth;
 			scale = width/width2;
-			console.log(scale);
 			contestname.style.transform = `scaleX(${scale})`;
 			contestname.style.transformOrigin = 'left';
 		}
@@ -159,7 +158,6 @@
 		window.addEventListener("resize", adjustScale);
 	
 		function createRatingChart(url, chart_id, rating_id, place_id, diff_id, endtime_id, contestname_id) {
-			console.log(url, chart_id, rating_id, place_id, diff_id, endtime_id, contestname_id)
 			fetch(url)
 			.then(response => response.json())
 			.then(data => {
@@ -289,6 +287,24 @@
 								const index = chartElement[0].index;
 								const dataPoint = data[index];
 								rating.innerText = dataPoint["NewRating"];
+								if (rating.classList.contains("gray")) {
+									rating.classList.remove("gray")
+								} else if (rating.classList.contains("brown")) {
+									rating.classList.remove("brown")
+								} else if (rating.classList.contains("green")) {
+									rating.classList.remove("green")
+								} else if (rating.classList.contains("cyan")) {
+									rating.classList.remove("cyan")
+								} else if (rating.classList.contains("blue")) {
+									rating.classList.remove("blue")
+								} else if (rating.classList.contains("yellow")) {
+									rating.classList.remove("yellow")
+								} else if (rating.classList.contains("orange")) {
+									rating.classList.remove("orange")
+								} else {
+									rating.classList.remove("red")
+								}
+								rating.classList.add(dataPoint["Rank"])
 								if (String(dataPoint["Place"]).slice(-1)==1) {
 									place.innerText = dataPoint["Place"] + "st";
 								} else if (String(dataPoint["Place"]).slice(-1)==2) {

@@ -22,6 +22,8 @@ def get(file):
 		elif i["NewRating"]<2400:i["Rank"]="yellow"
 		elif i["NewRating"]<2800:i["Rank"]="orange"
 		else:i["Rank"]="red"
+		if not "ContestScreenName" in i.keys():
+			i["ContestScreenName"] = i["ContestName"]
 	return data
 
 @home.route("/")

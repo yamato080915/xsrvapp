@@ -30,6 +30,14 @@
 		* {
 			font-family: system-ui;
 		}
+		.grayb {border: 2px solid rgba(128,128,128,0.5);}
+		.brownb {border: 2px solid rgba(128,64,0,0.5);}
+		.greenb {border: 2px solid rgba(0,128,0,0.5);}
+		.cyanb {border: 2px solid rgba(0,192,192,0.5);}
+		.blueb {border: 2px solid rgba(0,0,255,0.3);}
+		.yellowb {border: 2px solid rgba(192,192,0,0.5);}
+		.orangeb {border: 2px solid rgba(255,128,0,0.5);}
+		.redb {border: 2px solid rgba(255,0,0,0.5);}
 	</style>
 	<title>
 		Welcome
@@ -101,7 +109,7 @@
 						<a href="https://atcoder.jp/users/yamato0915" target="_blank" class="btn btn-primary me-2">
 							@yamato0915
 						</a>
-						<div class="border rounded shadow-sm p-2 d-flex align-items-center" style="max-width: 600px;transform: rotate(0);">
+						<div class="p-2 d-flex align-items-center {{ atcoder[-1]['Rank'] }}b" id="atcoder-div" style="max-width: 600px;transform: rotate(0);border-radius: 4px;">
 							<div class="fs-1 mx-2 {{ atcoder[-1]['Rank'] }} ratingf" id="rating">{{ atcoder[-1]["NewRating"] }}</div>
 							<div class="text-center mx-2">
 								<div class="small" id="place">{{ atcoder[-1]["Place"] }}{% if atcoder[-1]["Place"][-1]=="1" %}st{% elif atcoder[-1]["Place"][-1]=="2" %}nd{% elif atcoder[-1]["Place"][-1]=="3" %}rd{% else %}th{% endif %}</div>
@@ -126,7 +134,7 @@
 						<a href="https://onlinemathcontest.com/users/yamato0915" target="_blank" class="btn btn-primary me-2">
 							@yamato0915
 						</a>
-						<div class="border rounded shadow-sm p-2 d-flex align-items-center" style="max-width: 600px;transform: rotate(0);">
+						<div class="p-2 d-flex align-items-center {{ omc[-1]['Rank'] }}b" id="omc-div" style="max-width: 600px;transform: rotate(0);border-radius: 4px;">
 							<div class="fs-1 mx-2 {{ omc[-1]['Rank'] }} ratingf" id="omcrating">{{ omc[-1]["NewRating"] }}</div>
 							<div class="text-center mx-2">
 								<div class="small" id="omcplace">{{ omc[-1]["Place"] }}{% if omc[-1]["Place"][-1]=="1" %}st{% elif omc[-1]["Place"][-1]=="2" %}nd{% elif omc[-1]["Place"][-1]=="3" %}rd{% else %}th{% endif %}</div>
@@ -159,7 +167,7 @@
 		window.addEventListener("load", adjustScale);
 		window.addEventListener("resize", adjustScale);
 	
-		function createRatingChart(url, chart_id, rating_id, place_id, diff_id, endtime_id, contestname_id, a_id) {
+		function createRatingChart(url, chart_id, rating_id, place_id, diff_id, endtime_id, contestname_id, a_id, div_id) {
 			fetch(url)
 			.then(response => response.json())
 			.then(data => {
@@ -286,6 +294,7 @@
 							const date = document.getElementById(endtime_id);
 							const contestname = document.getElementById(contestname_id);
 							const link = document.getElementById(a_id)
+							const div = document.getElementById(div_id)
 							if (chartElement && chartElement.length > 0) {
 								const index = chartElement[0].index;
 								const dataPoint = data[index];
@@ -308,6 +317,26 @@
 									rating.classList.remove("red")
 								}
 								rating.classList.add(dataPoint["Rank"])
+
+								if (div.classList.contains("grayb")) {
+									div.classList.remove("grayb")
+								} else if (div.classList.contains("brownb")) {
+									div.classList.remove("brownb")
+								} else if (div.classList.contains("greenb")) {
+									div.classList.remove("greenb")
+								} else if (div.classList.contains("cyanb")) {
+									div.classList.remove("cyanb")
+								} else if (div.classList.contains("blueb")) {
+									div.classList.remove("blueb")
+								} else if (div.classList.contains("yellowb")) {
+									div.classList.remove("yellowb")
+								} else if (div.classList.contains("orangeb")) {
+									div.classList.remove("orangeb")
+								} else {
+									div.classList.remove("redb")
+								}
+								div.classList.add(String(dataPoint["Rank"]+"b"))
+
 								if (String(dataPoint["Place"]).slice(-1)==1) {
 									place.innerText = dataPoint["Place"] + "st";
 								} else if (String(dataPoint["Place"]).slice(-1)==2) {
@@ -338,8 +367,8 @@
 				});
 			});
 		}
-		createRatingChart("/api/atcoder/rating", "ratingChart", "rating", "place", "diff", "endtime", "contestname", "atcoder-a");
-		createRatingChart("/api/omc/rating", "omcRating", "omcrating", "omcplace", "omcdiff", "omcendtime", "omccontestname", "omc-a");
+		createRatingChart("/api/atcoder/rating", "ratingChart", "rating", "place", "diff", "endtime", "contestname", "atcoder-a", "atcoder-div");
+		createRatingChart("/api/omc/rating", "omcRating", "omcrating", "omcplace", "omcdiff", "omcendtime", "omccontestname", "omc-a", "omc-div");
 	</script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>

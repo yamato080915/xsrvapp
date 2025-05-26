@@ -64,7 +64,7 @@ def register():
 		session.pop("register_error", None)
 		session.pop("register_email", None)
 		session.pop("auth error", None)
-	return render_template("register.html")
+	return render_template("account/register.html")
 
 def send_auth(email, code, password=None):
 	if Auth.query.filter_by(email=email).first() and password!=None:
@@ -116,7 +116,7 @@ def login():
 	else:
 		session.pop("login_email", None)
 		session.pop("login_error", None)
-	return render_template("login.html")
+	return render_template("account/login.html")
 
 @account.route("/logout")
 @login_required
@@ -159,7 +159,7 @@ def forget():
 	else:
 		session.pop("reset", None)
 		session.pop("auth code", None)
-	return render_template("forget.html")
+	return render_template("account/forget.html")
 
 @account.route("/account", methods=["GET", "POST"], endpoint="account")
 @login_required
@@ -186,4 +186,4 @@ def account_view():
 	else:
 		session.pop("chpswd_error", None)
 		session.pop("chpswd", None)
-	return render_template("account.html")
+	return render_template("account/account.html")

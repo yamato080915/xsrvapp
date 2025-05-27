@@ -18,6 +18,7 @@ from controllers.math import math
 app.register_blueprint(math, url_prefix="/math")
 
 login_manager.blueprint_login_views = {
+	"account": "login",
 	"steam": "account.login",
-	"account": "login"
+    "math": "account.login"
 }

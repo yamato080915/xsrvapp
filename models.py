@@ -38,3 +38,11 @@ class Auth(db.Model):
 	def password(self, password):
 		self.password_hash = generate_password_hash(password)
 	
+class MathProblems(db.Model, UserMixin):
+	__tablename__ = "mathproblems"
+	id = db.Column(db.Integer, primary_key=True, index=True)
+	user = db.Column(db.String)
+	content = db.Column(db.String)
+	category = db.Column(db.Integer)
+	unit = db.Column(db.Integer)
+	created_at = db.Column(db.DateTime, default=datetime.now)

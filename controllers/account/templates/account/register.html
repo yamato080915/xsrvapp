@@ -1,0 +1,61 @@
+{% extends "account/layout.html" %}
+{% block title %}Sign Up{% endblock %}
+{% block content %}
+<div class="container py-5" style="max-width: 600px;">
+	<h1 class="mb-4 text-center">登録</h1>
+	<form action="{{ url_for('account.register').replace('index.cgi/', '') }}" method="post" novalidate="novalidate">
+		{% set error = session.get("register_error", {}) %}
+		{% set email = session.get("register_email", "") %}
+		{% set authcode = session.get("auth code", "") %}
+
+		{% if authcode == "" %}
+			{% set space = 5 %}
+			<div class="mb-3">
+				<label for="email" class="form-label">メールアドレス</label>
+				<input type="email" name="email" id="email" class="form-control{{ error['email'] }}" value="{{ email }}" required>
+				<div class="invalid-feedback">
+					{% if error["account_exists"] %}
+						このメールアドレスは既に登録されています。
+					{% else %}
+						メールアドレスが入力されていないか、有効ではありません
+					{% endif %}
+				</div>
+			</div>
+
+			<div class="mb-3">
+				<label for="password" class="form-label">パスワード</label>
+				<input type="password" name="password" id="password" class="form-control{{ error['password'] }}" required>
+				<div class="invalid-feedback">
+					パスワードは10文字以上に設定してください
+				</div>
+			</div>
+		{% else %}
+			{% set space = 3 %}
+			{% set autherror = session.get("auth error", "") %}
+			<div>
+				<label for="authcode" class="form-label">認証コード</label>
+				<input type="text" name="authcode" id="authcode" class="form-control{{ autherror }}" required>
+				<div class="invalid-feedback">
+					認証コードが誤っています
+				</div>
+				<label class="form-label mt-3">認証コードが届きませんか？
+				<a href="{{ url_for('account.register', resend=True) }}">再送信</a>
+				<br>迷惑メールを確認してください</label>
+			</div>
+		{% endif %}
+
+		<div class="d-grid mt-{{space}}">
+			<button type="submit" class="btn btn-primary">Register</button>
+		</div>
+
+		{% if authcode == "" %}
+		<div class="d-grid mt-4">
+			<label class="form-label">
+				アカウントをお持ちですか？
+				<a href="{{ url_for('account.login').replace('index.cgi/', '') }}">ログイン</a>
+			</label>
+		</div>
+		{% endif %}
+	</form>
+</div>
+{% endblock %}

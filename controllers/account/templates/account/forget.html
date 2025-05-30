@@ -1,0 +1,42 @@
+{% extends "account/layout.html" %}
+{% block title %}Reset Password{% endblock %}
+{% block content %}
+<div class="container py-5" style="max-width: 600px;">
+    <h1 class="mb-4 text-center">パスワードリセット</h1>
+    {% set reset = session.get("reset", {}) %}
+    {% set authcode = session.get("auth code") %}
+    <form action="" method="post" novalidate="novalidate">
+        {% if authcode %}
+        <div class="mb-3">
+            <label for="authcode" class="form-label">認証コード</label>
+            <input type="text" name="authcode" id="authcode" class="form-control{{ reset['valid'] }}" required>
+            <div class="invalid-feedback">
+                認証コードが誤っています
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="newpswd" class="form-label">新しいパスワード</label>
+            <input type="password" name="newpswd" id="newpswd" class="form-control{{ reset['pswd']}}" required>
+            <div class="invalid-feedback">
+                パスワードは10文字以上に設定してください
+            </div>
+        </div>
+        {% else %}
+        <div class="mb-3">
+            <label for="email" class="form-label">メールアドレス</label>
+            <input type="email" name="email" id="email" class="form-control{{ reset['exists'] }}" value="{{ reset['email'] }}" required>
+            <div class="invalid-feedback">
+                {% if reset['valid'] %}
+                    メールアドレスが入力されていないか、有効ではありません
+                {% else %}
+                    アカウントがありません
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+        <div class="d-grid mt-5">
+            <button type="submit" class="btn btn-primary">(実行)</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

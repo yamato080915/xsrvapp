@@ -1,0 +1,43 @@
+{% extends "account/layout.html" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<div class="container py-5" style="max-width: 600px;">
+	<h1 class="mb-4 text-center">ログイン</h1>
+	<form action="" method="post" novalidate="novalidate">
+		{% set error = session.get("login_error", "") %}
+		{% set email = session.get("login_email", "") %}
+		<div class="mb-3">
+			<label for="email" class="form-label">メールアドレス</label>
+			<input type="email" name="email" id="email" class="form-control{{ error }}" value="{{ email }}" required>
+			<div class="invalid-feedback">
+				メールアドレスまたはパスワードが間違っています。
+			</div>
+		</div>
+
+		<div class="mb-3">
+			<label for="password" class="form-label">パスワード</label>
+			<input type="password" name="password" id="password" class="form-control{{ error }}" required>
+			<div class="invalid-feedback">
+				パスワードを忘れた場合は
+				<a href="{{ url_for('account.forget') }}">こちら</a>
+			</div>
+		</div>
+
+		<div class="form-check mb-3">
+			<input type="checkbox" name="remember" id="remember" class="form-check-input">
+			<label for="remember" class="form-check-label">ログイン状態を保持する</label>
+		</div>
+
+		<div class="d-grid">
+			<button type="submit" class="btn btn-primary">Login</button>
+		</div>
+
+		<div class="d-grid mt-3">
+			<label>
+				アカウントがありませんか？
+				<a href="{{ url_for('account.register').replace('index.cgi/', '') }}">登録</a>
+			</label>
+		</div>
+	</form>
+</div>
+{% endblock %}

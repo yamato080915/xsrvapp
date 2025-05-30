@@ -12,7 +12,7 @@ account = Blueprint(
 	"account", 
 	__name__, 
 	static_folder="static",
-	template_folder="../steam/templates"
+	template_folder="./templates"
 )
 
 @account.route("/register", methods=["GET", "POST"])

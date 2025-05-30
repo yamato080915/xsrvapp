@@ -110,7 +110,7 @@ def login():
 			session.pop("login_email", None)
 			login_user(exists, remember=remember)
 			if request.args.get("next")==None or "logout" in request.args.get("next"):
-				return redirect(url_for("steam.profile").replace('index.cgi/', ''))
+				return redirect(url_for("home.index").replace('index.cgi/', ''))
 			else:
 				return redirect(request.args.get("next").replace('index.cgi/', ''))
 	else:

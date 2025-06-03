@@ -39,7 +39,7 @@
 					認証コードが誤っています
 				</div>
 				<label class="form-label mt-3">認証コードが届きませんか？
-				<a href="{{ url_for('account.register', resend=True) }}">再送信</a>
+				<a href="{{ url_for('account.register', resend=True).replace('index.cgi/', '') }}">再送信</a>
 				<br>迷惑メールを確認してください</label>
 			</div>
 		{% endif %}

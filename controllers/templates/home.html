@@ -53,7 +53,7 @@
 			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 				<div class="navbar-nav">
 					<a href="{{ url_for('steam.home').replace('index.cgi/', '') }}" class="nav-link active">steam</a>
-					<a href="{{ url_for('math.latex').replace('index.cgi/', '') }}" class="nav-link active">math</a>
+					<a href="{{ url_for('math.problems').replace('index.cgi/', '') }}" class="nav-link active">math</a>
 				</div>
 			</div>
 		</div>
@@ -73,9 +73,9 @@
 			<div class="col-md-5 mb-4">
 				<div class="card shadow-sm">
 					<div class="card-body">
-						<h5 class="card-title">Math Project</h5>
-						<p class="card-text">LaTeXコードからリアルタイムで数式を表示します</p>
-						<a href="{{ url_for('math.latex').replace('index.cgi/', '') }}" class="btn btn-success">Go to math</a>
+						<h5 class="card-title">Math</h5>
+						<p class="card-text">数学の問題を投稿できるサイトです。</p>
+						<a href="{{ url_for('math.problems').replace('index.cgi/', '') }}" class="btn btn-success">Go to math</a>
 					</div>
 				</div>
 			</div>

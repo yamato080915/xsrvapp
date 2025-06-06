@@ -266,7 +266,14 @@
 						responsive: true,
 						plugins: {
 							legend: {
-								display: true
+								display: true,
+								labels: {
+									generateLabels: function(chart) {
+										const original = Chart.defaults.plugins.legend.labels.generateLabels(chart);
+										original[1].fillStyle = "#808080";
+										return original;
+									}
+								}
 							}
 						},
 						scales: {

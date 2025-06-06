@@ -270,7 +270,8 @@
 								labels: {
 									generateLabels: function(chart) {
 										const original = Chart.defaults.plugins.legend.labels.generateLabels(chart);
-										original[1].fillStyle = "#808080";
+										original[0].fillStyle = "rgba(128,128,128,0.3)";
+										original[1].fillStyle = "rgba(128,128,128,0.3)";
 										return original;
 									}
 								}

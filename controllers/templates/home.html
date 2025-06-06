@@ -194,6 +194,26 @@
 					{ color: 'rgba(255,128,0,0.3)', max: 2799 },
 					{ color: 'rgba(255,0,0,0.3)', max: 9999 }
 				];
+				const RatingColors = data.map(contest => {
+					if (contest.NewRating<=399) return "#808080";
+					if (contest.NewRating<=799) return "#804000";
+					if (contest.NewRating<=1199) return "#008000";
+					if (contest.NewRating<=1599) return "#00c0c0";
+					if (contest.NewRating<=1999) return "#0000ff";
+					if (contest.NewRating<=2399) return "#c0c000";
+					if (contest.NewRating<=2799) return "#ff8000";
+					if (contest.NewRating<=9999) return "#ff0000";
+				});
+				const PerformanceColors = data.map(contest => {
+					if (contest.Performance<=399) return "#808080";
+					if (contest.Performance<=799) return "#804000";
+					if (contest.Performance<=1199) return "#008000";
+					if (contest.Performance<=1599) return "#00c0c0";
+					if (contest.Performance<=1999) return "#0000ff";
+					if (contest.Performance<=2399) return "#c0c000";
+					if (contest.Performance<=2799) return "#ff8000";
+					if (contest.Performance<=9999) return "#ff0000";
+				});
 
 				const plugin = {
 					id: 'rankBackground',
@@ -222,19 +242,23 @@
 							label: 'Rating',
 							data: dates.map((d, i) => ({ x: d, y: ratings[i] })),
 							borderColor: '#606060',
-							backgroundColor: "white",
+							backgroundColor: RatingColors,
 							fill: false,
 							tension: 0.1,
-							pointRadius: 3,
+							pointBorderColor: 'white',
+							borderWidth: 1,
+							pointRadius: 4,
 							pointHoverRadius: 5
 						},{
 							label: 'Performance',
 							data: dates.map((d, i) => ({ x: d, y: performances[i] })),
-							borderColor: '#909090',
-							backgroundColor: "#909090",
+							borderColor: 'rgba(255,0,0,0.5)',
+							backgroundColor: PerformanceColors,
 							fill: false,
 							tension: 0.1,
-							pointRadius: 2,
+							pointBorderColor: 'white',
+							borderWidth: 1,
+							pointRadius: 3,
 							pointHoverRadius: 5
 						}]
 					},

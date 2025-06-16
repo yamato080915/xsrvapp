@@ -41,10 +41,21 @@ class Auth(db.Model):
 class MathProblems(db.Model, UserMixin):
 	__tablename__ = "mathproblems"
 	id = db.Column(db.Integer, primary_key=True, index=True)
-	user = db.Column(db.String)
+	user = db.Column(db.Integer)
 	title = db.Column(db.String)
 	content = db.Column(db.String)
 	explanation = db.Column(db.String)
 	category = db.Column(db.Integer)
 	unit = db.Column(db.Integer)
+	score = db.Column(db.String)
+	created_at = db.Column(db.DateTime, default=datetime.now)
+
+class Submissions(db.Model, UserMixin):
+	__tablename__ = "submissions"
+	id = db.Column(db.Integer, primary_key=True, index=True)
+	problem = db.Column(db.Integer)
+	user = db.Column(db.Integer)
+	content = db.Column(db.String)
+	score = db.Column(db.String)
+	judged = db.Column(db.Boolean, default=False, nullable=False)
 	created_at = db.Column(db.DateTime, default=datetime.now)

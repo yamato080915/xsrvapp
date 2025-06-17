@@ -12,6 +12,9 @@ app.register_blueprint(home, url_prefix="/")
 from controllers.steam import steam
 app.register_blueprint(steam, url_prefix="/steam")
 
+from controllers.steam.chiebukuro import chiebukuro
+app.register_blueprint(chiebukuro, url_prefix="/steam/chiebukuro")
+
 from controllers.account import account
 app.register_blueprint(account, url_prefix="/")
 
@@ -21,7 +24,8 @@ app.register_blueprint(math, url_prefix="/math")
 login_manager.blueprint_login_views = {
 	"account": "login",
 	"steam": "account.login",
-	"math": "account.login"
+	"math": "account.login",
+	"chiebukuro": "account.login"
 }
 
 @app.errorhandler(400)

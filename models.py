@@ -59,3 +59,10 @@ class Submissions(db.Model, UserMixin):
 	score = db.Column(db.String)
 	judged = db.Column(db.Boolean, default=False, nullable=False)
 	created_at = db.Column(db.DateTime, default=datetime.now)
+
+class Question(db.Model, UserMixin):
+	__tablename__ = "question"
+	id = db.Column(db.Integer, primary_key=True, index=True)
+	user = db.Column(db.Integer)
+	content = db.Column(db.String)
+	category = db.Column(db.String)

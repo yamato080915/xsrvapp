@@ -67,7 +67,7 @@ def register():
 	return render_template("account/register.html")
 
 def send_auth(email, code, password=None):
-	if Auth.query.filter_by(email=email).first() and password!=None:
+	if Auth.query.filter_by(email=email).first() and password is not None:
 		db.session.query(Auth).filter_by(email=email).delete()
 		db.session.commit()
 	msg = Message("Authcode", recipients=[email], sender="No-Reply@yamato0915.xsrv.jp")

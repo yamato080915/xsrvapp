@@ -58,7 +58,9 @@ def omcRating():
 	return jsonify(data)
 
 def get_database(table, id=None):
-	if table=="MathProblems":
+	if table=="User":
+		TABLE = User
+	elif table=="MathProblems":
 		TABLE = MathProblems
 	elif table=="Submissions":
 		TABLE = Submissions
@@ -90,4 +92,4 @@ def database_id(tablename, id):
 @admin_required
 def updater(tablename, id):
 	data = get_database(tablename, id)
-	return render_template("update.html", data=data)
+	return render_template("update.html", data=data, keys=list(data.keys()))

@@ -1,5 +1,4 @@
-from flask import Blueprint, render_template, jsonify, abort, request
-from flask_login import login_required, current_user
+from flask import Blueprint, render_template, jsonify, abort, request, redirect, url_for
 import json
 from datetime import datetime
 
@@ -106,3 +105,11 @@ def updater(tablename, id):
 	else:
 		data = update_database(tablename, id, request.form)
 		return ""
+
+@home.route("/db/<tablename>/<int:id>/delete")
+@admin_required
+def deleter(tablename, id):
+	data = get_database(tablename, id, False)
+	db.session.delete(data)
+	db.session.commit()
+	return redirect(url_for("home.database", tablename=tablename))

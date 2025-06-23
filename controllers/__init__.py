@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, jsonify, abort
+from flask import Blueprint, render_template, jsonify, abort, request
 from flask_login import login_required, current_user
 import json
 from functools import wraps
@@ -57,7 +57,7 @@ def omcRating():
 	data = get("./omc.json")
 	return jsonify(data)
 
-def get_database(table, id=None):
+def get_database(table, id=None, dict=True):
 	if table=="User":
 		TABLE = User
 	elif table=="MathProblems":
@@ -72,9 +72,27 @@ def get_database(table, id=None):
 		record = db.session.query(TABLE).get(id)
 		if record is None:
 			abort(404)
-		return record.to_dict()
+		if dict:
+			return [record.to_dict(), record.data_type()]
+		else:
+			return record
 	else:
 		return [x.to_dict() for x in db.session.query(TABLE).all()]
+
+def update_database(table, id, form):
+	data = get_database(table, id, False)
+	if "email" in form:data.email = form["email"]
+	if "user" in form:data.user = form["user"]
+	if "title" in form:data.title = form["title"]
+	if "content" in form:data.content = form["content"]
+	if "explanation" in form:data.explanation = form["explanation"]
+	if "category" in form:data.category = form["category"]
+	if "unit" in form:data.unit = form["unit"]
+	if "score" in form:data.score = form["score"]
+	if "problem" in form:data.problem = form["problem"]
+	if "judged" in form:data.judged = form["judged"]
+	if "resolved" in form:data.resolved = form["resolved"]
+	db.session.commit()
 
 @home.route("/db/<tablename>")
 @admin_required
@@ -85,11 +103,15 @@ def database(tablename):
 @home.route("/db/<tablename>/<int:id>")
 @admin_required
 def database_id(tablename, id):
-	data = get_database(tablename, id)
+	data = get_database(tablename, id)[0]
 	return jsonify(data)
 
-@home.route("/db/<tablename>/<int:id>/update")
+@home.route("/db/<tablename>/<int:id>/update", methods=["GET", "POST"])
 @admin_required
 def updater(tablename, id):
-	data = get_database(tablename, id)
-	return render_template("update.html", data=data, keys=list(data.keys()))
+	if request.method=="GET":
+		data = get_database(tablename, id)
+		return render_template("update.html", data=data[0], keys=list(data[0].keys()), data_type=data[1])
+	else:
+		data = update_database(tablename, id, request.form)
+		return ""

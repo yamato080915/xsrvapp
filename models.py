@@ -28,6 +28,11 @@ class User(db.Model, UserMixin):
 			"id": self.id,
 			"email": self.email
 		}
+	
+	def data_type(self):
+		return {
+			"email": "email"
+		}
 
 class Auth(db.Model):
 	__tablename__ = "auth"
@@ -66,8 +71,18 @@ class MathProblems(db.Model):
 			"explanation": self.explanation,
 			"category": self.category,
 			"unit": self.unit,
-			"score": self.score,
-			"created_at": self.created_at
+			"score": self.score
+		}
+	
+	def data_type(self):
+		return {
+			"user": "text",
+			"title": "text",
+			"content": "textarea",
+			"explanation": "textarea",
+			"category": "text",
+			"unit": "text",
+			"score": "text"
 		}
 
 class Submissions(db.Model):
@@ -87,8 +102,16 @@ class Submissions(db.Model):
 			"user": self.user,
 			"content": self.content,
 			"score": self.score,
-			"judged": self.judged,
-			"created_at": self.created_at
+			"judged": self.judged
+		}
+	
+	def data_type(self):
+		return {
+			"problem": "text",
+			"user": "text",
+			"content": "textarea",
+			"score": "text",
+			"judged": "text"
 		}
 
 class Question(db.Model):
@@ -106,4 +129,12 @@ class Question(db.Model):
 			"content": self.content,
 			"category": self.category,
 			"resolved": self.resolved
+		}
+	
+	def data_type(self):
+		return {
+			"user": "text",
+			"content": "textarea",
+			"category": "text",
+			"resolved": "text"
 		}

@@ -10,8 +10,20 @@
 </head>
 <body>
 	<form method="post">
-		{{ data }}
-		{{ keys }}
+		{% for x in range(keys|length) %}
+		{% if keys[x] == "id" %}
+			<label>ID: {{ data["id"] }}</label><br>
+		{% else %}
+			<label for="{{ keys[x] }}">{{ keys[x] }}</label><br>
+			{% if data_type[keys[x]]=="textarea" %}
+				<textarea name="{{ keys[x] }}" id="{{ keys[x] }}" required>{{ data[keys[x]] }}</textarea>
+			{% else %}
+				<input type="{{ keys[x] }}" name="{{ keys[x] }}" id="{{ keys[x] }}" value="{{ data[keys[x]] }}" required>
+			{% endif %}
+		<br>
+		{% endif %}
+		{% endfor %}
+		<button type="submit">確定</button>
 	</form>
 </body>
 </html>

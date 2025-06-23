@@ -1,7 +1,6 @@
 from flask import Blueprint, render_template, jsonify, abort, request
 from flask_login import login_required, current_user
 import json
-from functools import wraps
 from datetime import datetime
 
 from models import User, MathProblems, Submissions, Question
@@ -9,15 +8,7 @@ from app import db
 
 home = Blueprint("home", __name__, static_folder="static", template_folder="templates")
 
-def admin_required(f):
-	@wraps(f)
-	def decorated_function(*args, **kwargs):
-		if not(current_user.is_authenticated):
-			abort(401)
-		if not current_user.is_admin:
-			abort(403)
-		return f(*args, **kwargs)
-	return decorated_function
+from perm import admin_required
 
 def get(file):
 	with open(file, "r", encoding="utf-8") as f:

@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, jsonify, abort, request, redirect,
 import json
 from datetime import datetime
 
-from models import User, MathProblems, Submissions, Question
+from models import User, MathProblems, Submissions, Question, Event
 from app import db
 
 home = Blueprint("home", __name__, static_folder="static", template_folder="templates")
@@ -56,6 +56,8 @@ def get_database(table, id=None, dict=True):
 		TABLE = Submissions
 	elif table=="Question":
 		TABLE = Question
+	elif table=="Event":
+		TABLE = Event
 	else:
 		abort(404)
 	if id is not None:

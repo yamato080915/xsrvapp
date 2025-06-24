@@ -138,3 +138,36 @@ class Question(db.Model):
 			"category": "text",
 			"resolved": "text"
 		}
+
+class Event(db.Model):
+	__tablename__ = "event"
+	id = db.Column(db.Integer, primary_key=True, index=True)
+	user = db.Column(db.Integer, nullable=False)
+	title = db.Column(db.String, nullable=False)
+	start = db.Column(db.DateTime, nullable=False)
+	end = db.Column(db.DateTime, nullable=False)
+
+	def to_dict(self):
+		return {
+			"id": self.id,
+			"user": self.user,
+			"title": self.title,
+			"start": self.start,
+			"end": self.end
+		}
+	
+	def response(self):
+		return {
+			"title": self.title,
+			"start": self.start.isoformat(),
+			"end": self.end.isoformat()
+		}
+	
+	def data_type(self):
+		return {
+			"id": "text",
+			"user": "text",
+			"title": "text",
+			"start": "text",
+			"end": "text"
+		}

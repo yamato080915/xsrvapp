@@ -114,4 +114,4 @@ def deleter(tablename, id):
 	data = get_database(tablename, id, False)
 	db.session.delete(data)
 	db.session.commit()
-	return redirect(url_for("home.database", tablename=tablename))
+	return redirect(url_for("home.database", tablename=tablename).replace("/index.cgi", ""))

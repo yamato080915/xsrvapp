@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, jsonify, abort, request, redirect, url_for
+from flask import Blueprint, render_template, jsonify, abort, request, redirect
+from myfunc import url_for
 import json
 from datetime import datetime
 
@@ -7,7 +8,7 @@ from app import db
 
 home = Blueprint("home", __name__, static_folder="static", template_folder="templates")
 
-from perm import admin_required
+from myfunc import admin_required
 
 def get(file):
 	with open(file, "r", encoding="utf-8") as f:
@@ -114,4 +115,4 @@ def deleter(tablename, id):
 	data = get_database(tablename, id, False)
 	db.session.delete(data)
 	db.session.commit()
-	return redirect(url_for("home.database", tablename=tablename).replace("/index.cgi", ""))
+	return redirect(url_for("home.database", tablename=tablename))

@@ -1,4 +1,4 @@
-from flask import abort
+from flask import abort, url_for as flask_url_for
 from flask_login import current_user
 from functools import wraps
 
@@ -11,3 +11,7 @@ def admin_required(f):
 			abort(403)
 		return f(*args, **kwargs)
 	return decorated_function
+
+def url_for(endpoint, **values):
+	url = flask_url_for(endpoint, **values)
+	return url.replace("/index.cgi", "")

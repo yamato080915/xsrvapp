@@ -35,4 +35,7 @@ login_manager.init_app(app)
 
 mail = Mail(app)
 
+from myfunc import url_for
+app.jinja_env.globals["url_for"] = url_for
+
 import www

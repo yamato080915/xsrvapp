@@ -19,7 +19,7 @@
 			<input type="password" name="password" id="password" class="form-control{{ error }}" required>
 			<div class="invalid-feedback">
 				パスワードを忘れた場合は
-				<a href="{{ url_for('account.forget').replace('index.cgi/', '') }}">こちら</a>
+				<a href="{{ url_for('account.forget') }}">こちら</a>
 			</div>
 		</div>
 
@@ -35,7 +35,7 @@
 		<div class="d-grid mt-3">
 			<label>
 				アカウントがありませんか？
-				<a href="{{ url_for('account.register').replace('index.cgi/', '') }}">登録</a>
+				<a href="{{ url_for('account.register') }}">登録</a>
 			</label>
 		</div>
 	</form>

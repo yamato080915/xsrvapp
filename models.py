@@ -121,6 +121,7 @@ class Question(db.Model):
 	content = db.Column(db.String)
 	category = db.Column(db.String)
 	resolved = db.Column(db.Boolean, default=False, nullable=False)
+	created_at = db.Column(db.DateTime, default=datetime.now)
 
 	def to_dict(self):
 		return {
@@ -128,7 +129,8 @@ class Question(db.Model):
 			"user": self.user,
 			"content": self.content,
 			"category": self.category,
-			"resolved": self.resolved
+			"resolved": self.resolved,
+			"posted_at": self.created_at
 		}
 	
 	def data_type(self):
@@ -136,7 +138,8 @@ class Question(db.Model):
 			"user": "text",
 			"content": "textarea",
 			"category": "text",
-			"resolved": "text"
+			"resolved": "text",
+			"posted_at": "text"
 		}
 
 class Event(db.Model):

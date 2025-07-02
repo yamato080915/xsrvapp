@@ -2,6 +2,8 @@ from flask import abort, url_for as flask_url_for
 from flask_login import current_user
 from functools import wraps
 
+from models import User
+
 def admin_required(f):
 	@wraps(f)
 	def decorated_function(*args, **kwargs):
@@ -15,3 +17,6 @@ def admin_required(f):
 def url_for(endpoint, **values):
 	url = flask_url_for(endpoint, **values)
 	return url.replace("/index.cgi", "")
+
+def get_username(user:int):
+	return User.query.get(user).email.split("@")[0]

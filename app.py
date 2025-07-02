@@ -35,8 +35,9 @@ login_manager.init_app(app)
 
 mail = Mail(app)
 
-from myfunc import url_for, get_username
+from myfunc import url_for, get_username, format_datetime
 app.jinja_env.globals["url_for"] = url_for
 app.jinja_env.globals["get_username"] = get_username
+app.jinja_env.globals["format_datetime"] = format_datetime
 
 import www

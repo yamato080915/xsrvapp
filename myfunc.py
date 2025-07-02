@@ -1,6 +1,7 @@
 from flask import abort, url_for as flask_url_for
 from flask_login import current_user
 from functools import wraps
+from datetime import datetime
 
 from models import User
 
@@ -20,3 +21,6 @@ def url_for(endpoint, **values):
 
 def get_username(user:int):
 	return User.query.get(user).email.split("@")[0]
+
+def format_datetime(date:datetime):
+	return date.strftime("%Y/%m/%d %H:%M")

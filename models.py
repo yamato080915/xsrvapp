@@ -142,6 +142,34 @@ class Question(db.Model):
 			"posted_at": "text"
 		}
 
+class Answer(db.Model):
+	__tablename__ = "answer"
+	id = db.Column(db.Integer, primary_key=True, index=True)
+	user = db.Column(db.Integer, nullable=False)
+	question = db.Column(db.Integer, nullable=False)
+	reply_to = db.Column(db.Integer)
+	content = db.Column(db.String, nullable=False)
+	created_at = db.Column(db.DateTime, default=datetime.now)
+
+	def to_dict(self):
+		return {
+			"id": self.id,
+			"user": self.user,
+			"question": self.question,
+			"reply_to": self.reply_to,
+			"content": self.content,
+			"posted_at": self.created_at
+		}
+	
+	def response(self):
+		return {
+			"user": "text",
+			"question": "text",
+			"reply_to": "text",
+			"content": "text",
+			"posted_at": "text"
+		}
+
 class Event(db.Model):
 	__tablename__ = "event"
 	id = db.Column(db.Integer, primary_key=True, index=True)

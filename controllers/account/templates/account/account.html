@@ -11,10 +11,10 @@
 
 	<div class="mb-4">
 		<label class="form-label">登録日</label>
-		<input type="text" class="form-control" value="{{ current_user.created_at.strftime('%Y-%m-%d %H:%M') }}" readonly>
+		<input type="text" class="form-control" value="{{ format_datetime(current_user.created_at) }}" readonly>
 	</div>
 	{% set chpswd = session.get("chpswd", None) %}
-	<form action="{{ url_for('account.account').replace('index.cgi/', '') }}" method="post" novalidate="novalidate">
+	<form action="{{ url_for('account.account') }}" method="post" novalidate="novalidate">
 		{% if chpswd %}
 			{% set error = session.get("chpswd_error", {}) %}
 			<div class="mb-4">

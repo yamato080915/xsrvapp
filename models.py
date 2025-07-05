@@ -121,6 +121,7 @@ class Question(db.Model):
 	content = db.Column(db.String)
 	category = db.Column(db.String)
 	resolved = db.Column(db.Boolean, default=False, nullable=False)
+	created_at = db.Column(db.DateTime, default=datetime.now)
 
 	def to_dict(self):
 		return {
@@ -128,7 +129,8 @@ class Question(db.Model):
 			"user": self.user,
 			"content": self.content,
 			"category": self.category,
-			"resolved": self.resolved
+			"resolved": self.resolved,
+			"posted_at": self.created_at
 		}
 	
 	def data_type(self):
@@ -136,5 +138,67 @@ class Question(db.Model):
 			"user": "text",
 			"content": "textarea",
 			"category": "text",
-			"resolved": "text"
+			"resolved": "text",
+			"posted_at": "text"
+		}
+
+class Answer(db.Model):
+	__tablename__ = "answer"
+	id = db.Column(db.Integer, primary_key=True, index=True)
+	user = db.Column(db.Integer, nullable=False)
+	question = db.Column(db.Integer, nullable=False)
+	reply_to = db.Column(db.Integer)
+	content = db.Column(db.String, nullable=False)
+	created_at = db.Column(db.DateTime, default=datetime.now)
+
+	def to_dict(self):
+		return {
+			"id": self.id,
+			"user": self.user,
+			"question": self.question,
+			"reply_to": self.reply_to,
+			"content": self.content,
+			"posted_at": self.created_at
+		}
+	
+	def response(self):
+		return {
+			"user": "text",
+			"question": "text",
+			"reply_to": "text",
+			"content": "text",
+			"posted_at": "text"
+		}
+
+class Event(db.Model):
+	__tablename__ = "event"
+	id = db.Column(db.Integer, primary_key=True, index=True)
+	user = db.Column(db.Integer, nullable=False)
+	title = db.Column(db.String, nullable=False)
+	start = db.Column(db.DateTime, nullable=False)
+	end = db.Column(db.DateTime, nullable=False)
+
+	def to_dict(self):
+		return {
+			"id": self.id,
+			"user": self.user,
+			"title": self.title,
+			"start": self.start,
+			"end": self.end
+		}
+	
+	def response(self):
+		return {
+			"title": self.title,
+			"start": self.start.isoformat(),
+			"end": self.end.isoformat()
+		}
+	
+	def data_type(self):
+		return {
+			"id": "text",
+			"user": "text",
+			"title": "text",
+			"start": "text",
+			"end": "text"
 		}

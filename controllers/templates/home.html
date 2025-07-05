@@ -47,14 +47,14 @@
 	<div class="pb-5">
 		<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
 			<div class="container-fluid">
-				<a class="navbar-brand" href="{{ url_for('home.index').replace('index.cgi/', '') }}">yamato0915</a>
+				<a class="navbar-brand" href="{{ url_for('home.index') }}">yamato0915</a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 					<div class="navbar-nav">
-						<a href="{{ url_for('steam.home').replace('index.cgi/', '') }}" class="nav-link active">steam</a>
-						<a href="{{ url_for('math.problems').replace('index.cgi/', '') }}" class="nav-link active">math</a>
+						<a href="{{ url_for('steam.home') }}" class="nav-link active">steam</a>
+						<a href="{{ url_for('math.problems') }}" class="nav-link active">math</a>
 					</div>
 				</div>
 			</div>
@@ -68,7 +68,7 @@
 					<div class="card-body">
 						<h5 class="card-title">NikkeiSteam</h5>
 						<p class="card-text"><a href="https://steam.nikkei.com/symposium/20250808/" style="color: #000;">日経STEAM SYMPOSIUM</a>発表用の自走学習援助アプリ</p>
-						<a href="{{ url_for('steam.home').replace('index.cgi/', '') }}" class="btn btn-success">Go to steam</a>
+						<a href="{{ url_for('steam.home') }}" class="btn btn-success">Go to steam</a>
 					</div>
 				</div>
 			</div>
@@ -77,7 +77,7 @@
 					<div class="card-body">
 						<h5 class="card-title">Math</h5>
 						<p class="card-text">数学の問題を投稿できるサイトです。</p>
-						<a href="{{ url_for('math.problems').replace('index.cgi/', '') }}" class="btn btn-success">Go to math</a>
+						<a href="{{ url_for('math.problems') }}" class="btn btn-success">Go to math</a>
 					</div>
 				</div>
 			</div>

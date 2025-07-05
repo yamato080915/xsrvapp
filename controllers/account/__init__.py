@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, request, redirect, url_for, session
+from flask import Blueprint, render_template, request, redirect, session
+from myfunc import url_for
 from flask_login import login_user, logout_user, login_required, current_user
 from flask_mail import Message
 from email_validator import validate_email, EmailNotValidError
@@ -56,7 +57,7 @@ def register():
 				session.pop("register_email", None)
 				session.pop("auth code", None)
 				session.pop("auth error", None)
-				return redirect(url_for("account.login").replace('index.cgi/', ''))
+				return redirect(url_for("account.login"))
 			else:
 				session["auth error"] = " is-invalid"
 	else:
@@ -110,9 +111,9 @@ def login():
 			session.pop("login_email", None)
 			login_user(exists, remember=remember)
 			if request.args.get("next")==None or "logout" in request.args.get("next"):
-				return redirect(url_for("home.index").replace('index.cgi/', ''))
+				return redirect(url_for("home.index"))
 			else:
-				return redirect(request.args.get("next").replace('index.cgi/', ''))
+				return redirect(request.args.get("next"))
 	else:
 		session.pop("login_email", None)
 		session.pop("login_error", None)
@@ -122,7 +123,7 @@ def login():
 @login_required
 def logout():
 	logout_user()
-	return redirect(url_for("account.login").replace('index.cgi/', ''))
+	return redirect(url_for("account.login"))
 
 @account.route("/reset-password", methods=["GET", "POST"])
 def forget():
@@ -155,7 +156,7 @@ def forget():
 				session.pop("reset", None)
 				session.pop("auth code", None)
 				print(session)
-				return redirect(url_for("account.login").replace('index.cgi/', ''))
+				return redirect(url_for("account.login"))
 	else:
 		session.pop("reset", None)
 		session.pop("auth code", None)
@@ -180,7 +181,7 @@ def account_view():
 				db.session.commit()
 				session.pop("chpswd_error", None)
 				session.pop("chpswd", None)
-				return redirect(url_for("account.account", status="complete").replace('index.cgi/', ''))
+				return redirect(url_for("account.account", status="complete"))
 		else:
 			session["chpswd"] = True
 	else:

@@ -1,13 +1,14 @@
-from flask import Blueprint, render_template, jsonify, abort, request, redirect, url_for
+from flask import Blueprint, render_template, jsonify, abort, request, redirect
+from myfunc import url_for
 import json
 from datetime import datetime
 
-from models import User, MathProblems, Submissions, Question
+from models import User, MathProblems, Submissions, Question, Event, Answer
 from app import db
 
 home = Blueprint("home", __name__, static_folder="static", template_folder="templates")
 
-from perm import admin_required
+from myfunc import admin_required
 
 def get(file):
 	with open(file, "r", encoding="utf-8") as f:
@@ -56,6 +57,10 @@ def get_database(table, id=None, dict=True):
 		TABLE = Submissions
 	elif table=="Question":
 		TABLE = Question
+	elif table=="Event":
+		TABLE = Event
+	elif table=="Answer":
+		TABLE = Answer
 	else:
 		abort(404)
 	if id is not None:

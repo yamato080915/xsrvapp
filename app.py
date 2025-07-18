@@ -24,6 +24,7 @@ app.config["MAIL_USERNAME"] = config_["MAIL_USERNAME"]
 app.config["MAIL_PASSWORD"] = config_["MAIL_PASSWORD"]
 app.config["MAIL_DEFAULT_SENDER"] = config_["MAIL_DEFAULT_SENDER"]
 app.config["SQLALCHEMY_DATABASE_URI"] = config_["SQLALCHEMY_DATABASE_URI"]
+app.config["OPENAI_API_KEY"] = config_["OPENAI_API_KEY"]
 
 db = SQLAlchemy()
 

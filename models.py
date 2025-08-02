@@ -93,6 +93,7 @@ class Submissions(db.Model):
 	content = db.Column(db.String)
 	score = db.Column(db.String)
 	judged = db.Column(db.Boolean, default=False, nullable=False)
+	comment = db.Column(db.String, nullable=True)
 	created_at = db.Column(db.DateTime, default=datetime.now)
 	
 	def to_dict(self):
@@ -102,7 +103,8 @@ class Submissions(db.Model):
 			"user": self.user,
 			"content": self.content,
 			"score": self.score,
-			"judged": self.judged
+			"judged": self.judged,
+			"comment": self.comment
 		}
 	
 	def data_type(self):
@@ -111,7 +113,8 @@ class Submissions(db.Model):
 			"user": "text",
 			"content": "textarea",
 			"score": "text",
-			"judged": "text"
+			"judged": "text",
+			"comment": "textarea"
 		}
 
 class Question(db.Model):

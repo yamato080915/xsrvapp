@@ -77,16 +77,17 @@ def get_database(table, id=None, dict=True):
 def update_database(table, id, form):
 	data = get_database(table, id, False)
 	if "email" in form:data.email = form["email"]
-	if "user" in form:data.user = form["user"]
+	if "user" in form:data.user = int(form["user"])
 	if "title" in form:data.title = form["title"]
 	if "content" in form:data.content = form["content"]
 	if "explanation" in form:data.explanation = form["explanation"]
 	if "category" in form:data.category = form["category"]
 	if "unit" in form:data.unit = form["unit"]
 	if "score" in form:data.score = form["score"]
-	if "problem" in form:data.problem = form["problem"]
-	if "judged" in form:data.judged = form["judged"]
-	if "resolved" in form:data.resolved = form["resolved"]
+	if "problem" in form:data.problem = int(form["problem"])
+	if "judged" in form:data.judged = bool(form["judged"])
+	if "resolved" in form:data.resolved = bool(form["resolved"])
+	if "comment" in form:data.comment = form["comment"]
 	db.session.commit()
 
 @home.route("/db/<tablename>")

@@ -43,9 +43,9 @@
 							{"G2":0,"TH":2},
 							{"DRG":0,"T1":2}
 						],
-						"winners":{"TH":null,"T1":null},
+						"winners":{"TH":2,"T1":0},
 						"elimination":{"G2":null,"DRG":null},
-						"decider":{}
+						"decider":{"T1":null}
 					}
 				],
 				"playoffs_stage": {

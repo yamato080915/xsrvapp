@@ -1,0 +1,38 @@
+{
+	"Pacific": {
+		"list": ["PRX", "RRQ", "DRX", "T1"],
+		"names": {
+			"PRX": "Paper Rex",
+			"RRQ": "Rex Regum Qeon",
+			"DRX": "DRX",
+			"T1": "T1"
+		}
+	},
+	"EMEA": {
+		"list": ["GX", "FNC", "TL", "TH"],
+		"names": {
+			"GX": "GIANTX",
+			"FNC": "Fnatic",
+			"TL": "Team Liquid",
+			"TH": "Team Heretics"
+		}
+	},
+	"Americas": {
+		"list": ["SEN", "MIBR", "NRG", "G2"],
+		"names": {
+			"SEN": "Sentinels",
+			"MIBR": "Made in Brazil",
+			"NRG": "NRG",
+			"G2": "G2 Esports"
+		}
+	},
+	"China": {
+		"list": ["XLG", "BLG", "EDG", "DRG"],
+		"names": {
+			"XLG": "Xi Lai Gaming",
+			"BLG": "Bilibili Gaming",
+			"EDG": "EDward Gaming",
+			"DRG": "Dragon Ranger Gaming"
+		}
+	}
+}

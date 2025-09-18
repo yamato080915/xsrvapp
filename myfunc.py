@@ -24,3 +24,15 @@ def get_username(user:int):
 
 def format_datetime(date:datetime):
 	return date.strftime("%Y/%m/%d %H:%M")
+
+def keys(d:dict):
+	return d.keys()
+
+def values(d:dict):
+	return d.values()
+
+def max_key(d:dict):
+	return None if None in d.values() else max(d, key=d.get)
+
+def enmrt(list):
+	return enumerate(list)

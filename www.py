@@ -21,6 +21,9 @@ app.register_blueprint(account, url_prefix="/")
 from controllers.math import math
 app.register_blueprint(math, url_prefix="/math")
 
+from controllers.valorant import valorant
+app.register_blueprint(valorant, url_prefix="/valorant")
+
 login_manager.blueprint_login_views = {
 	"home": "account.login",
 	"account": "login",

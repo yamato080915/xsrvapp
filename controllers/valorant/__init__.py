@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, url_for
+from flask import Blueprint, render_template
+from myfunc import url_for
 import json
 
 valorant = Blueprint(

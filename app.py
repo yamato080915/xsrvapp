@@ -44,9 +44,5 @@ app.jinja_env.globals["keys"] = keys
 app.jinja_env.globals["values"] = values
 app.jinja_env.globals["enumerate"] = enmrt
 app.jinja_env.globals["max_key"] = max_key
-if os.getenv("FLASK_DEBUG"):
-	app.jinja_env.globals["url"] = ""
-else:
-	app.jinja_env.globals["url"] = "https://yamato0915.xsrv.jp"
 
 import www

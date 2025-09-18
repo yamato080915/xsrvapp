@@ -49,17 +49,17 @@ def omcRating():
 	return jsonify(data)
 
 def get_database(table, id=None, dict=True):
-	if table=="User":
+	if table=="user":
 		TABLE = User
-	elif table=="MathProblems":
+	elif table=="mathproblems":
 		TABLE = MathProblems
-	elif table=="Submissions":
+	elif table=="submissions":
 		TABLE = Submissions
-	elif table=="Question":
+	elif table=="question":
 		TABLE = Question
-	elif table=="Event":
+	elif table=="event":
 		TABLE = Event
-	elif table=="Answer":
+	elif table=="answer":
 		TABLE = Answer
 	else:
 		abort(404)
@@ -77,44 +77,45 @@ def get_database(table, id=None, dict=True):
 def update_database(table, id, form):
 	data = get_database(table, id, False)
 	if "email" in form:data.email = form["email"]
-	if "user" in form:data.user = form["user"]
+	if "user" in form:data.user = int(form["user"])
 	if "title" in form:data.title = form["title"]
 	if "content" in form:data.content = form["content"]
 	if "explanation" in form:data.explanation = form["explanation"]
 	if "category" in form:data.category = form["category"]
 	if "unit" in form:data.unit = form["unit"]
 	if "score" in form:data.score = form["score"]
-	if "problem" in form:data.problem = form["problem"]
-	if "judged" in form:data.judged = form["judged"]
-	if "resolved" in form:data.resolved = form["resolved"]
+	if "problem" in form:data.problem = int(form["problem"])
+	if "judged" in form:data.judged = bool(form["judged"])
+	if "resolved" in form:data.resolved = bool(form["resolved"])
+	if "comment" in form:data.comment = form["comment"]
 	db.session.commit()
 
 @home.route("/db/<tablename>")
 @admin_required
 def database(tablename):
-	data = get_database(tablename)
+	data = get_database(tablename.lower())
 	return jsonify(data)
 
 @home.route("/db/<tablename>/<int:id>")
 @admin_required
 def database_id(tablename, id):
-	data = get_database(tablename, id)[0]
+	data = get_database(tablename.lower(), id)[0]
 	return jsonify(data)
 
 @home.route("/db/<tablename>/<int:id>/update", methods=["GET", "POST"])
 @admin_required
 def updater(tablename, id):
 	if request.method=="GET":
-		data = get_database(tablename, id)
+		data = get_database(tablename.lower(), id)
 		return render_template("update.html", data=data[0], keys=list(data[0].keys()), data_type=data[1])
 	else:
-		data = update_database(tablename, id, request.form)
+		data = update_database(tablename.lower(), id, request.form)
 		return ""
 
 @home.route("/db/<tablename>/<int:id>/delete")
 @admin_required
 def deleter(tablename, id):
-	data = get_database(tablename, id, False)
+	data = get_database(tablename.lower(), id, False)
 	db.session.delete(data)
 	db.session.commit()
 	return redirect(url_for("home.database", tablename=tablename))

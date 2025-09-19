@@ -14,7 +14,7 @@
 	<div class="row row-cols-auto">
 		{% for team in tournament.participants %}
 			{% if team in teams.Pacific.list %}
-				<div class="col">
+				<div class="col p-0">
 					<div class="card mb-3">
 						<div class="card-body text-center">
 							<h5 class="card-title">{{ teams.Pacific.names[team] }}</h5>
@@ -29,7 +29,7 @@
 	<div class="row row-cols-auto">
 		{% for team in tournament.participants %}
 			{% if team in teams.EMEA.list %}
-				<div class="col">
+				<div class="col p-0">
 					<div class="card mb-3">
 						<div class="card-body text-center">
 							<h5 class="card-title">{{ teams.EMEA.names[team] }}</h5>
@@ -44,7 +44,7 @@
 	<div class="row row-cols-auto">
 		{% for team in tournament.participants %}
 			{% if team in teams.Americas.list %}
-				<div class="col">
+				<div class="col p-0">
 					<div class="card mb-3">
 						<div class="card-body text-center">
 							<h5 class="card-title">{{ teams.Americas.names[team] }}</h5>
@@ -59,7 +59,7 @@
 	<div class="row row-cols-auto">
 		{% for team in tournament.participants %}
 			{% if team in teams.China.list %}
-				<div class="col">
+				<div class="col p-0">
 					<div class="card mb-3">
 						<div class="card-body text-center">
 							<h5 class="card-title">{{ teams.China.names[team] }}</h5>

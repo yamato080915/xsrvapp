@@ -38,6 +38,22 @@
 		.yellowb {border: 2px solid rgba(192,192,0,0.5);}
 		.orangeb {border: 2px solid rgba(255,128,0,0.5);}
 		.redb {border: 2px solid rgba(255,0,0,0.5);}
+
+		@font-face {
+			font-family: "FoundryGridnik";
+			src: url("{{ url_for('valorant.serve_fonts', font='Foundry-Gridnik-ExtraBold.otf') }}") format("opentype");
+			font-display: swap;
+		}
+
+		@font-face {
+			font-family: "Valorant";
+			src: url("{{ url_for('valorant.serve_fonts', font='valorant.ttf') }}") format("truetype");
+			font-display: swap;
+		}
+
+		.vct-font {
+			font-family: "FoundryGridnik";
+		}
 	</style>
 	<title>
 		{% block title %}{% endblock %}

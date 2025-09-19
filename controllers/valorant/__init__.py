@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, make_response
 from myfunc import url_for
 import json
 
@@ -8,6 +8,13 @@ valorant = Blueprint(
 	static_folder="statics", 
 	template_folder="templates"
 )
+
+@valorant.route("/fonts/<font>")
+def serve_fonts(font):
+	if font in ["Foundry-Gridnik-ExtraBold.otf", "valorant.ttf"]:
+		response = make_response(valorant.send_static_file(f"fonts/{font}"))
+		#response.headers["Cache-Control"] = 'public, max-age=86400'
+		return response
 
 @valorant.route("/")
 def index():

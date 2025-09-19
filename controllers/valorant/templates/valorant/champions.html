@@ -4,20 +4,20 @@
 
 {% block content %}
 <div class="container">
-	<h1>{{ name }}</h1>
+	<h1 class="vct-font">{{ name }}</h1>
 
-	<h2>date</h2>
-	<p>{{ tournament.date[0] }} - {{ tournament.date[1] }}</p>
+	<h2 class="vct-font">DATE</h2>
+	<p class="vct-font">{{ tournament.date[0] }} - {{ tournament.date[1] }}</p>
 
-	<h2>Participants</h2>
-	<h4>Pacific</h4>
+	<h2 class="vct-font">PARTICIPATING TEAMS</h2>
+	<h4 class="vct-font">PACIFIC</h4>
 	<div class="row row-cols-auto">
 		{% for team in tournament.participants %}
 			{% if team in teams.Pacific.list %}
 				<div class="col p-0">
 					<div class="card mb-3">
 						<div class="card-body text-center">
-							<h5 class="card-title">{{ teams.Pacific.names[team] }}</h5>
+							<h5 class="card-title vct-font">{{ teams.Pacific.names[team] }}</h5>
 							<img src="{{ url_for('valorant.static', filename='vct/icons/' + team + '.png') }}" alt="{{ team }} icon" class="w-auto">
 						</div>
 					</div>
@@ -25,14 +25,14 @@
 			{% endif %}
 		{% endfor %}
 	</div>
-	<h4>EMEA</h4>
+	<h4 class="vct-font">EMEA</h4>
 	<div class="row row-cols-auto">
 		{% for team in tournament.participants %}
 			{% if team in teams.EMEA.list %}
 				<div class="col p-0">
 					<div class="card mb-3">
 						<div class="card-body text-center">
-							<h5 class="card-title">{{ teams.EMEA.names[team] }}</h5>
+							<h5 class="card-title vct-font">{{ teams.EMEA.names[team] }}</h5>
 							<img src="{{ url_for('valorant.static', filename='vct/icons/' + team + '.png') }}" alt="{{ team }} icon" class="w-auto">
 						</div>
 					</div>
@@ -40,14 +40,14 @@
 			{% endif %}
 		{% endfor %}
 	</div>
-	<h4>Americas</h4>
+	<h4 class="vct-font">AMERICAS</h4>
 	<div class="row row-cols-auto">
 		{% for team in tournament.participants %}
 			{% if team in teams.Americas.list %}
 				<div class="col p-0">
 					<div class="card mb-3">
 						<div class="card-body text-center">
-							<h5 class="card-title">{{ teams.Americas.names[team] }}</h5>
+							<h5 class="card-title vct-font">{{ teams.Americas.names[team] }}</h5>
 							<img src="{{ url_for('valorant.static', filename='vct/icons/' + team + '.png') }}" alt="{{ team }} icon" class="w-auto">
 						</div>
 					</div>
@@ -55,14 +55,14 @@
 			{% endif %}
 		{% endfor %}
 	</div>
-	<h4>China</h4>
+	<h4 class="vct-font">CHINA</h4>
 	<div class="row row-cols-auto">
 		{% for team in tournament.participants %}
 			{% if team in teams.China.list %}
 				<div class="col p-0">
 					<div class="card mb-3">
 						<div class="card-body text-center">
-							<h5 class="card-title">{{ teams.China.names[team] }}</h5>
+							<h5 class="card-title vct-font">{{ teams.China.names[team] }}</h5>
 							<img src="{{ url_for('valorant.static', filename='vct/icons/' + team + '.png') }}" alt="{{ team }} icon" class="w-auto">
 						</div>
 					</div>
@@ -72,14 +72,14 @@
 	</div>
 </div>
 <div class="p-2">
-	<h2>Results</h2>
-	<h3>Group Stage</h3>
+	<h2 class="vct-font">RESULTS</h2>
+	<h3 class="vct-font">GROUP STAGE</h3>
 	<div class="row row-cols-2">
 		{% for i, group in enumerate(tournament.results.group_stage) %}
 		<div class="col">
-			<h4>Group {{ ["A", "B", "C", "D"][i] }}</h4>
+			<h4 class="vct-font">GROUP {{ ["A", "B", "C", "D"][i] }}</h4>
 			<div class="mx-2">
-				<h4>Upper Bracket</h4>
+				<h4 class="vct-font">Upper Bracket</h4>
 				<div class="row mx-3">
 					<div class="col">
 						{% for i in group.opening %}
@@ -88,8 +88,8 @@
 									{% if i != {} %}
 										{% for j in keys(i) %}
 											<div class="d-flex border p-2 align-items-center" {% if max_key(i) == j %}style="font-weight: bold;background-color: rgb(197, 255, 202);"{% endif %}>
-												<div class="p-2 text-start"><img src="{{ url_for('valorant.static', filename='vct/icons/' + j+ '.png') }}" alt="{{ j }} icon" class="me-2 w-25">{{ j }}</div>
-												<div class="ms-auto p-2">{% if i[j] is not none %}{{ i[j] }}{% else %}{% endif %}</div>
+												<div class="p-2 text-start vct-font"><img src="{{ url_for('valorant.static', filename='vct/icons/' + j+ '.png') }}" alt="{{ j }} icon" class="me-2 w-25">{{ j }}</div>
+												<div class="ms-auto p-2 vct-font">{% if i[j] is not none %}{{ i[j] }}{% else %}{% endif %}</div>
 											</div>
 										{% endfor %}
 									{% else %}
@@ -110,8 +110,8 @@
 								{% if group.winners != {} %}
 									{% for j in keys(group.winners) %}
 										<div class="d-flex border p-2" {% if max_key(group.winners) == j %}style="font-weight: bold;background-color: rgb(197, 255, 202);"{% endif %}>
-											<div class="p-2 text-start"><img src="{{ url_for('valorant.static', filename='vct/icons/' + j+ '.png') }}" alt="{{ j }} icon" class="me-2 w-25">{{ j }}</div>
-											<div class="ms-auto p-2">{% if group.winners[j] is not none %}{{ group.winners[j] }}{% else %}{% endif %}</div>
+											<div class="p-2 text-start vct-font"><img src="{{ url_for('valorant.static', filename='vct/icons/' + j+ '.png') }}" alt="{{ j }} icon" class="me-2 w-25">{{ j }}</div>
+											<div class="ms-auto p-2 vct-font">{% if group.winners[j] is not none %}{{ group.winners[j] }}{% else %}{% endif %}</div>
 										</div>
 									{% endfor %}
 								{% else %}
@@ -127,17 +127,17 @@
 					</div>
 					<div class="col d-flex align-items-center">
 						<div class="card mb-3 w-100">
-							<div class="card-body text-center">
+							<div class="card-body text-center vct-font">
 								{% if group.winners != {} and max_key(group.winners) is not none %}
-									<div class="p-2 text-start"><img src="{{ url_for('valorant.static', filename='vct/icons/' + max_key(group.winners) + '.png') }}" alt="{{ max_key(group.winners) }} icon" class="me-2 w-25">{{ max_key(group.winners) }}</div>
+									<div class="p-2 text-start vct-font"><img src="{{ url_for('valorant.static', filename='vct/icons/' + max_key(group.winners) + '.png') }}" alt="{{ max_key(group.winners) }} icon" class="me-2 w-25">{{ max_key(group.winners) }}</div>
 								{% else %}
-									Place1
+									{{ ["A", "B", "C", "D"][i] }}#1 SEED
 								{% endif %}
 							</div>
 						</div>
 					</div>
 				</div>
-				<h4>Lower Bracket</h4>
+				<h4 class="vct-font">Lower Bracket</h4>
 				<div class="row mx-3">
 					<div class="col d-flex align-items-center">
 						<div class="card mb-3 w-100">
@@ -145,8 +145,8 @@
 								{% if group.elimination != {} %}
 									{% for j in keys(group.elimination) %}
 										<div class="d-flex border p-2" {% if max_key(group.elimination) == j %}style="font-weight: bold;background-color: rgb(197, 255, 202);"{% endif %}>
-											<div class="p-2 text-start"><img src="{{ url_for('valorant.static', filename='vct/icons/' + j+ '.png') }}" alt="{{ j }} icon" class="me-2 w-25">{{ j }}</div>
-											<div class="ms-auto p-2">{% if group.elimination[j] is not none %}{{ group.elimination[j] }}{% else %}{% endif %}</div>
+											<div class="p-2 text-start vct-font"><img src="{{ url_for('valorant.static', filename='vct/icons/' + j+ '.png') }}" alt="{{ j }} icon" class="me-2 w-25">{{ j }}</div>
+											<div class="ms-auto p-2 vct-font">{% if group.elimination[j] is not none %}{{ group.elimination[j] }}{% else %}{% endif %}</div>
 										</div>
 									{% endfor %}
 								{% else %}
@@ -166,8 +166,8 @@
 								{% if group.decider != {} %}
 									{% for j in keys(group.decider) %}
 										<div class="d-flex border p-2" {% if max_key(group.decider) == j %}style="font-weight: bold;background-color: rgb(197, 255, 202);"{% endif %}>
-											<div class="p-2 text-start"><img src="{{ url_for('valorant.static', filename='vct/icons/' + j+ '.png') }}" alt="{{ j }} icon" class="me-2 w-25">{{ j }}</div>
-											<div class="ms-auto p-2">{% if group.decider[j] is not none %}{{ group.decider[j] }}{% else %}{% endif %}</div>
+											<div class="p-2 text-start vct-font"><img src="{{ url_for('valorant.static', filename='vct/icons/' + j+ '.png') }}" alt="{{ j }} icon" class="me-2 w-25">{{ j }}</div>
+											<div class="ms-auto p-2 vct-font">{% if group.decider[j] is not none %}{{ group.decider[j] }}{% else %}{% endif %}</div>
 										</div>
 									{% endfor %}
 									{% if keys(group.decider)|length == 1 %}
@@ -188,11 +188,11 @@
 					</div>
 					<div class="col d-flex align-items-center">
 						<div class="card mb-3 w-100">
-							<div class="card-body text-center">
+							<div class="card-body text-center vct-font">
 								{% if group.decider != {} and max_key(group.decider) is not none %}
-									<div class="p-2 text-start"><img src="{{ url_for('valorant.static', filename='vct/icons/' + max_key(group.decider) + '.png') }}" alt="{{ max_key(group.decider) }} icon" class="me-2 w-25">{{ max_key(group.decider) }}</div>
+									<div class="p-2 text-start vct-font"><img src="{{ url_for('valorant.static', filename='vct/icons/' + max_key(group.decider) + '.png') }}" alt="{{ max_key(group.decider) }} icon" class="me-2 w-25">{{ max_key(group.decider) }}</div>
 								{% else %}
-									Place2
+									{{ ["A", "B", "C", "D"][i] }}#2 SEED
 								{% endif %}
 							</div>
 						</div>
@@ -202,27 +202,29 @@
 		</div>
 		{% endfor %}
 	</div>
-	<h3>Playoffs Stage</h3>
+	<h3 class="vct-font">PLAYOFFS STAGE</h3>
 	<div class="mx-5">
-		<h4>Upper Bracket</h4>
+		<h4 class="vct-font">Upper Bracket</h4>
 		<div class="row mx-3">
 			<div class="col">
-				{% for i in tournament.results.playoffs_stage.upper_quarterfinals %}
+				{% for x,i in enumerate(tournament.results.playoffs_stage.upper_quarterfinals) %}
 					<div class="card mb-3">
 						<div class="card-body text-center p-0">
 							{% if i != {} %}
 								{% for j in keys(i) %}
 									<div class="d-flex border p-2" {% if max_key(i) == j %}style="font-weight: bold;background-color: rgb(197, 255, 202);"{% endif %}>
-										<div class="p-2 text-start"><img src="{{ url_for('valorant.static', filename='vct/icons/' + j+ '.png') }}" alt="{{ j }} icon" class="me-2 w-25">{{ j }}</div>
-										<div class="ms-auto p-2">{% if i[j] is not none %}{{ i[j] }}{% else %}{% endif %}</div>
+										<div class="p-2 text-start vct-font"><img src="{{ url_for('valorant.static', filename='vct/icons/' + j+ '.png') }}" alt="{{ j }} icon" class="me-2 w-25">{{ j }}</div>
+										<div class="ms-auto p-2 vct-font">{% if i[j] is not none %}{{ i[j] }}{% else %}{% endif %}</div>
 									</div>
 								{% endfor %}
 							{% else %}
-								<div class="border p-2">
-									<div class="p-2">---</div>
+								<div class="d-flex border p-2">
+									<div class="p-2 text-start vct-font"><img src="{{ url_for('valorant.static', filename='vct/icons/vct.png') }}" alt="vct icon" class="me-2 w-25">TEAM {{ x*2+1 }}</div>
+									<div class="ms-auto p-2 vct-font">0</div>
 								</div>
-								<div class="border p-2">
-									<div class="p-2">---</div>
+								<div class="d-flex border p-2">
+									<div class="p-2 text-start vct-font"><img src="{{ url_for('valorant.static', filename='vct/icons/vct.png') }}" alt="vct icon" class="me-2 w-25">TEAM {{ (x+1)*2 }}</div>
+									<div class="ms-auto p-2 vct-font">0</div>
 								</div>
 							{% endif %}
 						</div>
@@ -236,8 +238,8 @@
 							{% if i != {} %}
 								{% for j in keys(i) %}
 									<div class="d-flex border p-2" {% if max_key(i) == j %}style="font-weight: bold;background-color: rgb(197, 255, 202);"{% endif %}>
-										<div class="p-2 text-start"><img src="{{ url_for('valorant.static', filename='vct/icons/' + j+ '.png') }}" alt="{{ j }} icon" class="me-2 w-25">{{ j }}</div>
-										<div class="ms-auto p-2">{% if i[j] is not none %}{{ i[j] }}{% else %}{% endif %}</div>
+										<div class="p-2 text-start vct-font"><img src="{{ url_for('valorant.static', filename='vct/icons/' + j+ '.png') }}" alt="{{ j }} icon" class="me-2 w-25">{{ j }}</div>
+										<div class="ms-auto p-2 vct-font">{% if i[j] is not none %}{{ i[j] }}{% else %}{% endif %}</div>
 									</div>
 								{% endfor %}
 							{% else %}
@@ -258,8 +260,8 @@
 						{% if tournament.results.playoffs_stage.upper_final != {} %}
 							{% for j in keys(tournament.results.playoffs_stage.upper_final) %}
 								<div class="d-flex border p-2" {% if max_key(tournament.results.playoffs_stage.upper_final) == j %}style="font-weight: bold;background-color: rgb(197, 255, 202);"{% endif %}>
-									<div class="p-2 text-start"><img src="{{ url_for('valorant.static', filename='vct/icons/' + j+ '.png') }}" alt="{{ j }} icon" class="me-2 w-25">{{ j }}</div>
-									<div class="ms-auto p-2">{% if tournament.results.playoffs_stage.upper_final[j] is not none %}{{ tournament.results.playoffs_stage.upper_final[j] }}{% else %}{% endif %}</div>
+									<div class="p-2 text-start vct-font"><img src="{{ url_for('valorant.static', filename='vct/icons/' + j+ '.png') }}" alt="{{ j }} icon" class="me-2 w-25">{{ j }}</div>
+									<div class="ms-auto p-2 vct-font">{% if tournament.results.playoffs_stage.upper_final[j] is not none %}{{ tournament.results.playoffs_stage.upper_final[j] }}{% else %}{% endif %}</div>
 								</div>
 							{% endfor %}
 						{% else %}
@@ -279,8 +281,8 @@
 						{% if tournament.results.playoffs_stage.grand_final != {} %}
 							{% for j in keys(tournament.results.playoffs_stage.grand_final) %}
 								<div class="d-flex border p-2" {% if max_key(tournament.results.playoffs_stage.grand_final) == j %}style="font-weight: bold;background-color: rgb(197, 255, 202);"{% endif %}>
-									<div class="p-2 text-start"><img src="{{ url_for('valorant.static', filename='vct/icons/' + j+ '.png') }}" alt="{{ j }} icon" class="me-2 w-25">{{ j }}</div>
-									<div class="ms-auto p-2">{% if tournament.results.playoffs_stage.grand_final[j] is not none %}{{ tournament.results.playoffs_stage.grand_final[j] }}{% else %}{% endif %}</div>
+									<div class="p-2 text-start vct-font"><img src="{{ url_for('valorant.static', filename='vct/icons/' + j+ '.png') }}" alt="{{ j }} icon" class="me-2 w-25">{{ j }}</div>
+									<div class="ms-auto p-2 vct-font">{% if tournament.results.playoffs_stage.grand_final[j] is not none %}{{ tournament.results.playoffs_stage.grand_final[j] }}{% else %}{% endif %}</div>
 								</div>
 							{% endfor %}
 						{% else %}
@@ -304,8 +306,8 @@
 							{% if i != {} %}
 								{% for j in keys(i) %}
 									<div class="d-flex border p-2" {% if max_key(tournament.results.playoffs_stage.lower_round_1) == j %}style="font-weight: bold;background-color: rgb(197, 255, 202);"{% endif %}>
-										<div class="p-2 text-start"><img src="{{ url_for('valorant.static', filename='vct/icons/' + j+ '.png') }}" alt="{{ j }} icon" class="me-2 w-25">{{ j }}</div>
-										<div class="ms-auto p-2">{% if i[j] is not none %}{{ i[j] }}{% else %}{% endif %}</div>
+										<div class="p-2 text-start vct-font"><img src="{{ url_for('valorant.static', filename='vct/icons/' + j+ '.png') }}" alt="{{ j }} icon" class="me-2 w-25">{{ j }}</div>
+										<div class="ms-auto p-2 vct-font">{% if i[j] is not none %}{{ i[j] }}{% else %}{% endif %}</div>
 									</div>
 								{% endfor %}
 							{% else %}
@@ -327,8 +329,8 @@
 							{% if i != {} %}
 								{% for j in keys(i) %}
 									<div class="d-flex border p-2" {% if max_key(tournament.results.playoffs_stage.lower_round_2) == j %}style="font-weight: bold;background-color: rgb(197, 255, 202);"{% endif %}>
-										<div class="p-2 text-start"><img src="{{ url_for('valorant.static', filename='vct/icons/' + j+ '.png') }}" alt="{{ j }} icon" class="me-2 w-25">{{ j }}</div>
-										<div class="ms-auto p-2">{% if i[j] is not none %}{{ i[j] }}{% else %}{% endif %}</div>
+										<div class="p-2 text-start vct-font"><img src="{{ url_for('valorant.static', filename='vct/icons/' + j+ '.png') }}" alt="{{ j }} icon" class="me-2 w-25">{{ j }}</div>
+										<div class="ms-auto p-2 vct-font">{% if i[j] is not none %}{{ i[j] }}{% else %}{% endif %}</div>
 									</div>
 								{% endfor %}
 							{% else %}
@@ -349,8 +351,8 @@
 						{% if tournament.results.playoffs_stage.lower_round_3 != {} %}
 							{% for j in keys(tournament.results.playoffs_stage.lower_round_3) %}
 								<div class="d-flex border p-2" {% if max_key(tournament.results.playoffs_stage.lower_round_3) == j %}style="font-weight: bold;background-color: rgb(197, 255, 202);"{% endif %}>
-									<div class="p-2 text-start"><img src="{{ url_for('valorant.static', filename='vct/icons/' + j+ '.png') }}" alt="{{ j }} icon" class="me-2 w-25">{{ j }}</div>
-									<div class="ms-auto p-2">{% if tournament.results.playoffs_stage.lower_round_3[j] is not none %}{{ tournament.results.playoffs_stage.lower_round_3[j] }}{% else %}{% endif %}</div>
+									<div class="p-2 text-start vct-font"><img src="{{ url_for('valorant.static', filename='vct/icons/' + j+ '.png') }}" alt="{{ j }} icon" class="me-2 w-25">{{ j }}</div>
+									<div class="ms-auto p-2 vct-font">{% if tournament.results.playoffs_stage.lower_round_3[j] is not none %}{{ tournament.results.playoffs_stage.lower_round_3[j] }}{% else %}{% endif %}</div>
 								</div>
 							{% endfor %}
 						{% else %}
@@ -370,8 +372,8 @@
 						{% if tournament.results.playoffs_stage.lower_final != {} %}
 							{% for j in keys(tournament.results.playoffs_stage.lower_final) %}
 								<div class="d-flex border p-2" {% if max_key(tournament.results.playoffs_stage.lower_final) == j %}style="font-weight: bold;background-color: rgb(197, 255, 202);"{% endif %}>
-									<div class="p-2 text-start"><img src="{{ url_for('valorant.static', filename='vct/icons/' + j+ '.png') }}" alt="{{ j }} icon" class="me-2 w-25">{{ j }}</div>
-									<div class="ms-auto p-2">{% if tournament.results.playoffs_stage.lower_final[j] is not none %}{{ tournament.results.playoffs_stage.lower_final[j] }}{% else %}{% endif %}</div>
+									<div class="p-2 text-start vct-font"><img src="{{ url_for('valorant.static', filename='vct/icons/' + j+ '.png') }}" alt="{{ j }} icon" class="me-2 w-25">{{ j }}</div>
+									<div class="ms-auto p-2 vct-font">{% if tournament.results.playoffs_stage.lower_final[j] is not none %}{{ tournament.results.playoffs_stage.lower_final[j] }}{% else %}{% endif %}</div>
 								</div>
 							{% endfor %}
 						{% else %}

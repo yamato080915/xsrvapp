@@ -92,14 +92,14 @@
 					</div>
 					<div class="col d-flex align-items-center">
 						<div class="card mb-3 w-100 mx-0 px-0">
-							<div class="card-body text-center vct-font mx-0 px-0 {% if group.winners!={} and max_key(group.winners) is not none %}pb-0{% endif %}">
+							<div class="card-body text-center vct-font mx-0 px-0 pb-0">
 								{% if group.winners != {} and max_key(group.winners) is not none %}
 									<div class="p-2 text-center vct-font"><img src="{{ url_for('valorant.static', filename='vct/icons/' + max_key(group.winners) + '.png') }}" alt="{{ max_key(group.winners) }} icon" class="me-2 w-25">{{ max_key(group.winners) }}</div>
-									<hr class="mb-0 pb-0">
-									<p class="m-0 p-0"><big><strong>ADVANCES</strong></big><br> TO Playoffs</p>
 								{% else %}
 									{{ ["A", "B", "C", "D"][i] }}#1 SEED
 								{% endif %}
+								<hr class="mb-0 pb-0">
+								<p class="m-0 p-0"><big><strong>ADVANCES</strong></big><br> TO Playoffs</p>
 							</div>
 						</div>
 					</div>
@@ -157,14 +157,14 @@
 					</div>
 					<div class="col d-flex align-items-center">
 						<div class="card mb-3 w-100 mx-0 px-0">
-							<div class="card-body text-center vct-font mx-0 px-0 {% if group.decider!={} and max_key(group.decider) is not none %}pb-0{% endif %}">
+							<div class="card-body text-center vct-font mx-0 px-0 pb-0">
 								{% if group.decider != {} and max_key(group.decider) is not none %}
 									<div class="p-2 text-center vct-font"><img src="{{ url_for('valorant.static', filename='vct/icons/' + max_key(group.decider) + '.png') }}" alt="{{ max_key(group.decider) }} icon" class="me-2 w-25">{{ max_key(group.decider) }}</div>
-									<hr class="mb-0 pb-0">
-									<p class="m-0 p-0"><big><strong>ADVANCES</strong></big><br> TO Playoffs</p>
 								{% else %}
 									{{ ["A", "B", "C", "D"][i] }}#2 SEED
 								{% endif %}
+								<hr class="mb-0 pb-0">
+								<p class="m-0 p-0"><big><strong>ADVANCES</strong></big><br> TO Playoffs</p>
 							</div>
 						</div>
 					</div>

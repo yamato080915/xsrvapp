@@ -18,7 +18,7 @@
 						],
 						"winners":{"PRX":2,"GX":1},
 						"elimination":{"XLG":2,"SEN":1},
-						"decider":{"GX":null, "XLG":null}
+						"decider":{"GX":null,"XLG":null}
 					},
 					{
 						"opening":[
@@ -26,8 +26,8 @@
 							{"RRQ":0,"FNC":2}
 						],
 						"winners":{"MIBR":1,"FNC":2},
-						"elimination":{"BLG":null,"RRQ":null},
-						"decider":{"MIBR":null}
+						"elimination":{"BLG":1,"RRQ":2},
+						"decider":{"MIBR":null,"RRQ":null}
 					},
 					{
 						"opening":[
@@ -36,7 +36,7 @@
 						],
 						"winners":{"DRX":1,"NRG":2},
 						"elimination":{"TL":2,"EDG":1},
-						"decider":{"DRX":null, "TL":null}
+						"decider":{"DRX":null,"TL":null}
 					},
 					{
 						"opening":[
@@ -44,8 +44,8 @@
 							{"DRG":0,"T1":2}
 						],
 						"winners":{"TH":2,"T1":0},
-						"elimination":{"G2":null,"DRG":null},
-						"decider":{"T1":null}
+						"elimination":{"G2":2,"DRG":0},
+						"decider":{"T1":null,"G2":null}
 					}
 				],
 				"playoffs_stage": {

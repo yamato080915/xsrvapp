@@ -18,7 +18,7 @@
 						],
 						"winners":{"PRX":2,"GX":1},
 						"elimination":{"XLG":2,"SEN":1},
-						"decider":{"GX":null,"XLG":null}
+						"decider":{"GX":2,"XLG":0}
 					},
 					{
 						"opening":[
@@ -36,7 +36,7 @@
 						],
 						"winners":{"DRX":1,"NRG":2},
 						"elimination":{"TL":2,"EDG":1},
-						"decider":{"DRX":null,"TL":null}
+						"decider":{"DRX":2,"TL":0}
 					},
 					{
 						"opening":[

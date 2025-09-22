@@ -281,7 +281,7 @@
 						<div class="card-body text-center p-0">
 							{% if i != {} %}
 								{% for j in keys(i) %}
-									<div class="d-flex border p-2 align-items-center" {% if max_key(tournament.results.playoffs_stage.lower_round_1) == j %}style="font-weight: bold;background-color: rgb(197, 255, 202);"{% endif %}>
+									<div class="d-flex border p-2 align-items-center" {% if max_key(i) == j %}style="font-weight: bold;background-color: rgb(197, 255, 202);"{% endif %}>
 										<div class="p-2 text-start vct-font"><img src="{{ url_for('valorant.serve_icons', team=j) }}" alt="{{ j }} icon" class="me-2 w-25">{{ j }}</div>
 										<div class="ms-auto p-2 vct-font">{% if i[j] is not none %}{{ i[j] }}{% else %}{% endif %}</div>
 									</div>
@@ -304,7 +304,7 @@
 						<div class="card-body text-center p-0">
 							{% if i != {} %}
 								{% for j in keys(i) %}
-									<div class="d-flex border p-2 align-items-center" {% if max_key(tournament.results.playoffs_stage.lower_round_2) == j %}style="font-weight: bold;background-color: rgb(197, 255, 202);"{% endif %}>
+									<div class="d-flex border p-2 align-items-center" {% if max_key(i) == j %}style="font-weight: bold;background-color: rgb(197, 255, 202);"{% endif %}>
 										<div class="p-2 text-start vct-font"><img src="{{ url_for('valorant.serve_icons', team=j) }}" alt="{{ j }} icon" class="me-2 w-25">{{ j }}</div>
 										<div class="ms-auto p-2 vct-font">{% if i[j] is not none %}{{ i[j] }}{% else %}{% endif %}</div>
 									</div>

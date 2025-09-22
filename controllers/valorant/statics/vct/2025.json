@@ -27,7 +27,7 @@
 						],
 						"winners":{"MIBR":1,"FNC":2},
 						"elimination":{"BLG":1,"RRQ":2},
-						"decider":{"MIBR":null,"RRQ":null}
+						"decider":{"MIBR":2,"RRQ":0}
 					},
 					{
 						"opening":[
@@ -45,7 +45,7 @@
 						],
 						"winners":{"TH":2,"T1":0},
 						"elimination":{"G2":2,"DRG":0},
-						"decider":{"T1":null,"G2":null}
+						"decider":{"T1":0,"G2":2}
 					}
 				],
 				"playoffs_stage": {

@@ -1,38 +1,46 @@
 {
 	"Pacific": {
-		"list": ["PRX", "RRQ", "DRX", "T1"],
+		"list": ["PRX", "RRQ", "DRX", "T1", "GEN", "TLN"],
 		"names": {
 			"PRX": "Paper Rex",
 			"RRQ": "Rex Regum Qeon",
 			"DRX": "DRX",
-			"T1": "T1"
+			"T1": "T1",
+			"GEN": "Gen.G",
+			"TLN": "TALON"
 		}
 	},
 	"EMEA": {
-		"list": ["GX", "FNC", "TL", "TH"],
+		"list": ["GX", "FNC", "TL", "TH", "VIT", "FUT"],
 		"names": {
 			"GX": "GIANTX",
 			"FNC": "Fnatic",
 			"TL": "Team Liquid",
-			"TH": "Team Heretics"
+			"TH": "Team Heretics",
+			"VIT": "Team Vitality",
+			"FUT": "FUT Esports"
 		}
 	},
 	"Americas": {
-		"list": ["SEN", "MIBR", "NRG", "G2"],
+		"list": ["SEN", "MIBR", "NRG", "G2", "LEV", "KRÜ"],
 		"names": {
 			"SEN": "Sentinels",
 			"MIBR": "Made in Brazil",
 			"NRG": "NRG",
-			"G2": "G2 Esports"
+			"G2": "G2 Esports",
+			"LEV": "LEVIATÁN",
+			"KRÜ": "KRÜ Esports"
 		}
 	},
 	"China": {
-		"list": ["XLG", "BLG", "EDG", "DRG"],
+		"list": ["XLG", "BLG", "EDG", "DRG", "FPX", "TE"],
 		"names": {
 			"XLG": "Xi Lai Gaming",
 			"BLG": "Bilibili Gaming",
 			"EDG": "EDward Gaming",
-			"DRG": "Dragon Ranger Gaming"
+			"DRG": "Dragon Ranger Gaming",
+			"FPX": "FunPlus Phoenix",
+			"TE": "Trace Esports"
 		}
 	}
 }

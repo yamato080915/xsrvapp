@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, make_response
 from myfunc import url_for
-import json
+import json, os
 
 valorant = Blueprint(
 	"valorant", 
@@ -13,7 +13,18 @@ valorant = Blueprint(
 def serve_fonts(font):
 	if font in ["Foundry-Gridnik-ExtraBold.otf", "valorant.ttf"]:
 		response = make_response(valorant.send_static_file(f"fonts/{font}"))
-		#response.headers["Cache-Control"] = 'public, max-age=86400'
+		response.headers["Cache-Control"] = 'public, max-age=31536000'
+		return response
+
+@valorant.route("/icons/<team>")
+def serve_icons(team:str):
+	if team.upper() == "VCT":
+		response = make_response(valorant.send_static_file("vct/icons/vct.png"))
+		response.headers["Cache-Control"] = 'public, max-age=31536000'
+		return response
+	elif f"{team.upper()}.png" in os.listdir("controllers/valorant/statics/vct/icons"):
+		response = make_response(valorant.send_static_file(f"vct/icons/{team.upper()}.png"))
+		response.headers["Cache-Control"] = 'public, max-age=31536000'
 		return response
 
 @valorant.route("/")

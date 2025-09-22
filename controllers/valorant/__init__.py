@@ -31,7 +31,7 @@ def serve_icons(team:str):
 		return response
 
 @valorant.route("/vct/<int:year>/champions")
-def vct_year(year):
+def champions(year):
 	with open(f'controllers{url_for("valorant.static", filename=f"vct/{year}.json")}', encoding="utf-8") as f:
 		data = json.load(f)
 	with open(f'controllers{url_for("valorant.static", filename="vct/teams.json")}', encoding="utf-8") as f:

@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, make_response
+from flask import Blueprint, render_template, make_response, send_file
 from myfunc import url_for
 import json, os
 
@@ -8,6 +8,9 @@ valorant = Blueprint(
 	static_folder="statics", 
 	template_folder="templates"
 )
+@valorant.route("/manifest.json")
+def manifest():
+	return send_file("controllers/valorant/statics/manifest.json", mimetype="application/manifest+json")
 
 @valorant.route("/fonts/<font>")
 def serve_fonts(font):
@@ -26,14 +29,6 @@ def serve_icons(team:str):
 		response = make_response(valorant.send_static_file(f"vct/icons/{team.upper()}.png"))
 		response.headers["Cache-Control"] = 'public, max-age=31536000'
 		return response
-
-@valorant.route("/")
-def index():
-	return "Valorant Controller Index"
-
-@valorant.route("/vct")
-def vct():
-	return "Valorant Controller VCT"
 
 @valorant.route("/vct/<int:year>/champions")
 def vct_year(year):

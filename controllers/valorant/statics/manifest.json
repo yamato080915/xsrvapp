@@ -1,0 +1,13 @@
+{
+    "name": "ValorantInfo",
+    "short_name": "ValoInfo",
+    "icons": [
+        {
+           "src": "statics/vct/icons/vct.png",
+           "type": "image/png",
+           "sizes": "200x200"
+        }
+    ],
+    "start_url": "/valorant",
+    "display": "standalone"
+}

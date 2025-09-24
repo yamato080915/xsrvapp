@@ -20,7 +20,7 @@ def serve_fonts(font):
 		return response
 
 @valorant.route("/icons/<team>")
-def serve_icons(team:str):
+def serve_icons(team):
 	if team.upper() == "VCT":
 		response = make_response(valorant.send_static_file("vct/icons/vct.png"))
 		response.headers["Cache-Control"] = 'public, max-age=31536000'
@@ -32,7 +32,7 @@ def serve_icons(team:str):
 
 @valorant.route("/vct/<int:year>/champions")
 def champions(year):
-	with open(f'controllers{url_for("valorant.static", filename=f"vct/{year}.json")}', encoding="utf-8") as f:
+	with open(f'controllers{url_for("valorant.static", filename=f"vct/{year}/champions.json")}', encoding="utf-8") as f:
 		data = json.load(f)
 	with open(f'controllers{url_for("valorant.static", filename="vct/teams.json")}', encoding="utf-8") as f:
 		teams = json.load(f)
@@ -42,7 +42,7 @@ def champions(year):
 
 @valorant.route("/vct/<int:year>/champions/pickem")
 def pickem(year):
-	with open(f'controllers{url_for("valorant.static", filename=f"vct/pick\'em.json")}', encoding="utf-8") as f:
+	with open(f'controllers{url_for("valorant.static", filename=f"vct/{year}/pick\'em.json")}', encoding="utf-8") as f:
 		data = json.load(f)
 	with open(f'controllers{url_for("valorant.static", filename="vct/teams.json")}', encoding="utf-8") as f:
 		teams = json.load(f)

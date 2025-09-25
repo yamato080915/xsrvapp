@@ -1,0 +1,98 @@
+{
+	"date": ["2025-07-15-2025-09-01"],
+	"participants": [
+		"DFM","DRX","GEN","GE",
+		"PRX","RRQ","T1","TLN",
+		"TS","ZETA","NS","BME"
+	],
+	"results": {
+		"group_stage": [
+			{
+				"place": ["DRX","RRQ","NS","GEN","TS","GE"],
+				"result":{
+					"DRX":{"REC":[4,1],"MAP":[8,3],"RND":[123,102]},
+					"RRQ":{"REC":[3,2],"MAP":[6,7],"RND":[139,129]},
+					"NS":{"REC":[3,2],"MAP":[8,5],"RND":[140,129]},
+					"GEN":{"REC":[3,2],"MAP":[7,5],"RND":[132,107]},
+					"TS":{"REC":[1,4],"MAP":[4,9],"RND":[102,154]},
+					"GE":{"REC":[1,4],"MAP":[4,8],"RND":[113,128]}
+				},
+				"matches":[
+					{"NS":2,"TS":1},
+					{"DRX":0,"GEN":2},
+					{"RRQ":0,"GE":2},
+					{"DRX":2,"NS":1},
+					{"GE":1,"TS":2},
+					{"RRQ":2,"GEN":1},
+
+					{"GEN":2,"GE":1},
+					{"RRQ":2,"NS":1},
+					{"DRX":2,"TS":0},
+
+					{"GEN":2,"TS":0},
+					{"RRQ":0,"DRX":2},
+					{"NS":2,"GE":0},
+
+					{"GEN":0,"NS":2},
+					{"DRX":2,"GE":0},
+					{"RRQ":2,"TS":1}
+				]
+			},
+			{
+				"place":["PRX","TLN","T1","DFM","ZETA","BME"],
+				"result":{
+					"PRX":{"REC":[4,1],"MAP":[8,2],"RND":[128,110]},
+					"TLN":{"REC":[3,2],"MAP":[7,4],"RND":[133,102]},
+					"T1":{"REC":[3,2],"MAP":[6,4],"RND":[121,105]},
+					"DFM":{"REC":[3,2],"MAP":[6,6],"RND":[117,115]},
+					"ZETA":{"REC":[2,3],"MAP":[5,7],"RND":[111,127]},
+					"BME":{"REC":[0,5],"MAP":[1,10],"RND":[92,143]}
+				},
+				"matches":[
+					{"BME":0,"TLN":2},
+					{"T1":0,"PRX":2},
+					{"ZETA":1,"DFM":2},
+					{"BME":0,"T1":2},
+					{"PRX":2,"DFM":0},
+					{"TLN":2,"ZETA":0},
+
+					{"TLN":1,"DFM":2},
+					{"T1":2,"ZETA":0},
+					{"BME":0,"PRX":2},
+
+					{"TLN":2,"T1":0},
+					{"BME":0,"DFM":2},
+					{"PRX":0,"ZETA":2},
+
+					{"TLN":0,"PRX":2},
+					{"BME":1,"ZETA":2},
+					{"T1":2,"DFM":0}
+				]
+			}
+		],
+		"playoffs_stage": {
+			"place": ["PRX","RRQ","TLN","T1","NS","DRX","DFM","GEN"],
+			"prize":[100000,65000,40000,25000,10000,10000],
+			"opening": [
+				{"TLN":2,"NS":0},
+				{"RRQ":1,"T1":2}
+			],
+			"upper_semifinals": [
+				{"DRX":1,"TLN":2},
+				{"PRX":2,"T1":0}
+			],
+			"upper_final": {"TLN":0,"PRX":2},
+			"grand_final": {"PRX":3,"RRQ":1},
+			"lower_round_1": [
+				{"NS":2,"DFM":0},
+				{"RRQ":2,"GEN":1}
+			],
+			"lower_round_2": [
+				{"T1":2,"NS":0},
+				{"DRX":0,"RRQ":2}
+			],
+			"lower_round_3": {"T1":1,"RRQ":2},
+			"lower_final": {"TLN":2,"RRQ":3}
+		}
+	}
+}

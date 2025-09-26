@@ -53,23 +53,23 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">Group {{ ["Alpha","Omega"][i] }}</th>
-                            <th scope="col">REC</th>
-                            <th scope="col">MAP</th>
-                            <th scope="col">RND</th>
-                            <th scope="col">Δ</th>
+                            <th scope="col" class="vct-font text-center">Group {{ ["Alpha","Omega"][i] }}</th>
+                            <th scope="col" class="vct-font text-center">REC</th>
+                            <th scope="col" class="vct-font text-center">MAP</th>
+                            <th scope="col" class="vct-font text-center">RND</th>
+                            <th scope="col" class="vct-font text-center">Δ</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for j,team in enumerate(group.place) %}
                             <tr>
-                                <td class="table_icon">
+                                <td class="table_icon vct-font">
                                     <img src="{{ url_for('valorant.serve_icons', team=team) }}" alt="{{team}} icon">
                                     {{ teams[data.region].names[team] }}</td>
-                                <td>{{ group.result[team].REC[0] }} - {{ group.result[team].REC[1] }}</td>
-                                <td>{{ group.result[team].MAP[0] }} / {{ group.result[team].MAP[1] }}</td>
-                                <td>{{ group.result[team].RND[0] }} / {{ group.result[team].RND[1] }}</td>
-                                <td>{% if group.result[team].RND[0] > group.result[team].RND[1] %}+{% endif %}{{ group.result[team].RND[0] - group.result[team].RND[1] }}</td>
+                                <td class="vct-font text-center">{{ group.result[team].REC[0] }} - {{ group.result[team].REC[1] }}</td>
+                                <td class="vct-font text-center">{{ group.result[team].MAP[0] }} / {{ group.result[team].MAP[1] }}</td>
+                                <td class="vct-font text-center">{{ group.result[team].RND[0] }} / {{ group.result[team].RND[1] }}</td>
+                                <td class="vct-font text-center">{% if group.result[team].RND[0] > group.result[team].RND[1] %}+{% endif %}{{ group.result[team].RND[0] - group.result[team].RND[1] }}</td>
                             </tr>
                         {% endfor %}
                     </tbody>
@@ -77,14 +77,16 @@
                 <h5 class="vct-font">Matches</h5>
                 <div class="container">
                     {% for j,match in enumerate(group.matches) %}
-                        <div class="row">
-                            <div class="col">
+                        <div class="row mb-1 mx-5">
+                            <div class="col-5 ms-3 text-end border p-3 vct-font table_icon">
                                 {{ keys(match)[0] }}
+                                <img src="{{ url_for('valorant.serve_icons', team=keys(match)[0]) }}" alt="{{keys(match)[0]}} icon">
                             </div>
-                            <div class="col">
+                            <div class="col text-center border p-3 vct-font">
                                 {{ match[keys(match)[0]] }}:{{ match[keys(match)[1]] }}
                             </div>
-                            <div class="col">
+                            <div class="col-5 me-3 text-start border p-3 vct-font table_icon">
+                                <img src="{{ url_for('valorant.serve_icons', team=keys(match)[1]) }}" alt="{{keys(match)[1]}} icon">
                                 {{ keys(match)[1] }}
                             </div>
                         </div>
@@ -93,5 +95,6 @@
             </div>
         {% endfor %}
     </div>
+    <h3 class="vct-font">PLAYOFFS STAGE</h3>
 </div>
 {% endblock %}

@@ -52,17 +52,17 @@
 					"upper_quarterfinals": [
 						{"FNC":2,"DRX":1},
 						{"PRX":2,"G2":1},
-						{"TH":null,"MIBR":null},
-						{"NRG":null,"GX":null}
+						{"TH":0,"MIBR":2},
+						{"NRG":2,"GX":0}
 					],
 					"upper_semifinals": [
 						{"FNC":null,"PRX":null},
-						{}
+						{"MIBR":null,"NRG":null}
 					],
 					"upper_final": {},
 					"lower_round_1": [
 						{"DRX":null,"G2":null},
-						{}
+						{"TH":null,"GX":null}
 					],
 					"lower_round_2": [
 						{},

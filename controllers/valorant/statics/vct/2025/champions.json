@@ -50,18 +50,18 @@
 				],
 				"playoffs_stage": {
 					"upper_quarterfinals": [
-						{"FNC":null,"DRX":null},
-						{"PRX":null,"G2":null},
+						{"FNC":2,"DRX":1},
+						{"PRX":2,"G2":1},
 						{"TH":null,"MIBR":null},
 						{"NRG":null,"GX":null}
 					],
 					"upper_semifinals": [
-						{},
+						{"FNC":null,"PRX":null},
 						{}
 					],
 					"upper_final": {},
 					"lower_round_1": [
-						{},
+						{"DRX":null,"G2":null},
 						{}
 					],
 					"lower_round_2": [

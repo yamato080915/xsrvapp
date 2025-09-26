@@ -26,10 +26,10 @@ def format_datetime(date:datetime):
 	return date.strftime("%Y/%m/%d %H:%M")
 
 def keys(d:dict):
-	return d.keys()
+	return list(d.keys())
 
 def values(d:dict):
-	return d.values()
+	return list(d.values())
 
 def max_key(d:dict):
 	return None if None in d.values() else max(d, key=d.get)

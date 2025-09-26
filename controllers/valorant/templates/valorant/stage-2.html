@@ -1,0 +1,97 @@
+{% extends "account/layout.html" %}
+
+{% block title %}VCT {{ data.year }}: {{ data.region }} Stage 2{% endblock %}
+{% block head %}
+    <link rel="manifest" href="{{ url_for('valorant.manifest') }}">
+    <link rel="icon" href="{{ url_for('valorant.serve_icons', team='vct') }}" type="image/png">
+    <link rel="apple-touch-icon" href="{{ url_for('valorant.serve_icons', team='vct') }}" type="image/png">
+{% endblock %}
+
+{% block content %}
+<style>
+    .participant img {
+        max-width: 80%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+    .table_icon img {
+        max-height: 20px;
+        width: auto;
+        margin: 0 auto;
+    }
+    .table th .table td {
+        vertical-align: middle;
+    }
+</style>
+<div class="container">
+    <h1 class="vct-font">VCT {{ data.year }}: {{ data.region }} Stage 2</h1>
+
+    <h2 class="vct-font">DATE</h2>
+    <p class="vct-font">{{ data.date[0] }} - {{ data.date[1] }}</p>
+    <h2 class="vct-font">PARTICIPATING TEAMS</h2>
+    <div class="row row-cols-2 row-cols-sm-4">
+        {% for team in data.participants %}
+        <div class="col p-0 participant">
+            <div class="card mb-3">
+                <div class="card-body text-center">
+                    <h5 class="card-title vct-font">{{ teams[data.region].names[team] }}</h5>
+                    <img src="{{ url_for('valorant.serve_icons', team=team) }}" alt="{{team}} icon" class="w-auto">
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<div class="p-2">
+    <h2 class="vct-font">RESULTS</h2>
+    <h3 class="vct-font">GROUP STAGE</h3>
+    <div class="row row-cols-1 row-cols-lg-2">
+        {% for i,group in enumerate(data.results.group_stage) %}
+            <div class="col">
+                <h4 class="vct-font">GROUP {{ ["Alpha","Omega"][i] }}</h4>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Group {{ ["Alpha","Omega"][i] }}</th>
+                            <th scope="col">REC</th>
+                            <th scope="col">MAP</th>
+                            <th scope="col">RND</th>
+                            <th scope="col">Δ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for j,team in enumerate(group.place) %}
+                            <tr>
+                                <td class="table_icon">
+                                    <img src="{{ url_for('valorant.serve_icons', team=team) }}" alt="{{team}} icon">
+                                    {{ teams[data.region].names[team] }}</td>
+                                <td>{{ group.result[team].REC[0] }} - {{ group.result[team].REC[1] }}</td>
+                                <td>{{ group.result[team].MAP[0] }} / {{ group.result[team].MAP[1] }}</td>
+                                <td>{{ group.result[team].RND[0] }} / {{ group.result[team].RND[1] }}</td>
+                                <td>{% if group.result[team].RND[0] > group.result[team].RND[1] %}+{% endif %}{{ group.result[team].RND[0] - group.result[team].RND[1] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <h5 class="vct-font">Matches</h5>
+                <div class="container">
+                    {% for j,match in enumerate(group.matches) %}
+                        <div class="row">
+                            <div class="col">
+                                {{ keys(match)[0] }}
+                            </div>
+                            <div class="col">
+                                {{ match[keys(match)[0]] }}:{{ match[keys(match)[1]] }}
+                            </div>
+                            <div class="col">
+                                {{ keys(match)[1] }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

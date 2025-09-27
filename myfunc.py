@@ -26,13 +26,16 @@ def format_datetime(date:datetime):
 	return date.strftime("%Y/%m/%d %H:%M")
 
 def keys(d:dict):
-	return list(d.keys())
+	li = list(d.keys())
+	if len(li)<=1:
+		li=["TBD","TBD"]
+	return li
 
 def values(d:dict):
 	return list(d.values())
 
 def max_key(d:dict):
-	return None if None in d.values() else max(d, key=d.get)
+	return None if None in d.values() or d=={} else max(d, key=d.get)
 
 def enmrt(list):
 	return enumerate(list)

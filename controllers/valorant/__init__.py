@@ -21,7 +21,7 @@ def serve_fonts(font):
 
 @valorant.route("/icons/<team>")
 def serve_icons(team):
-	if team.upper() == "VCT":
+	if team.upper() == "VCT" or team=="TBD":
 		response = make_response(valorant.send_static_file("vct/icons/vct.png"))
 		response.headers["Cache-Control"] = 'public, max-age=31536000'
 		return response

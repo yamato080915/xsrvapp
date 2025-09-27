@@ -61,12 +61,12 @@
 					],
 					"upper_final": {},
 					"lower_round_1": [
-						{"DRX":null,"G2":null},
-						{"TH":null,"GX":null}
+						{"DRX":2,"G2":1},
+						{"TH":2,"GX":1}
 					],
 					"lower_round_2": [
-						{},
-						{}
+						{"TBD":null,"DRX":null},
+						{"TBD":null,"TH":null}
 					],
 					"lower_round_3": {},
 					"lower_final": {},

@@ -57,15 +57,15 @@
 					],
 					"upper_semifinals": [
 						{"FNC":2,"PRX":1},
-						{"MIBR":null,"NRG":null}
+						{"MIBR":1,"NRG":2}
 					],
-					"upper_final": {"FNC":null,"TBD":null},
+					"upper_final": {"FNC":null,"NRG":null},
 					"lower_round_1": [
 						{"DRX":2,"G2":1},
 						{"TH":2,"GX":1}
 					],
 					"lower_round_2": [
-						{"TBD":null,"DRX":null},
+						{"MIBR":null,"DRX":null},
 						{"PRX":null,"TH":null}
 					],
 					"lower_round_3": {},

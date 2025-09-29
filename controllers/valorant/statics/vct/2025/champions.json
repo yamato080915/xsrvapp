@@ -65,10 +65,10 @@
 						{"TH":2,"GX":1}
 					],
 					"lower_round_2": [
-						{"MIBR":null,"DRX":null},
-						{"PRX":null,"TH":null}
+						{"MIBR":1,"DRX":2},
+						{"PRX":2,"TH":1}
 					],
-					"lower_round_3": {},
+					"lower_semifinal": {"DRX":null,"PRX":null},
 					"lower_final": {},
 					"grand_final": {}
 				}

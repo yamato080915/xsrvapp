@@ -94,7 +94,7 @@
 				{"T1":2,"NS":0},
 				{"DRX":0,"RRQ":2}
 			],
-			"lower_round_3": {"T1":1,"RRQ":2},
+			"lower_semifinal": {"T1":1,"RRQ":2},
 			"lower_final": {"TLN":2,"RRQ":3}
 		}
 	}

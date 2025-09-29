@@ -65,7 +65,7 @@ champions = {
                         {},
                         {}
                     ],
-                    "lower_round_3":{},
+                    "lower_semifinal":{},
                     "lower_final":{},
                     "grand_final":{}
                 }

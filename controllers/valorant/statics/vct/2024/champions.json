@@ -68,7 +68,7 @@
                         {"TH":2,"DRX":1},
                         {"SEN":2,"FNC":1}
                     ],
-                    "lower_round_3": {"TH":2,"SEN":1},
+                    "lower_semifinal": {"TH":2,"SEN":1},
                     "lower_final": {"LEV":1,"TH":3},
                     "grand_final": {"EDG":3,"TH":2}
                 }

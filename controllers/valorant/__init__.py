@@ -10,7 +10,9 @@ valorant = Blueprint(
 )
 @valorant.route("/manifest.json")
 def manifest():
-	return send_file("controllers/valorant/statics/manifest.json", mimetype="application/manifest+json")
+	response = make_response(send_file("controllers/valorant/statics/manifest.json", mimetype="application/manifest+json"))
+	response.headers["Cache-Control"] = 'public, max-age=2592000'
+	return response
 
 @valorant.route("/fonts/<font>")
 def serve_fonts(font):

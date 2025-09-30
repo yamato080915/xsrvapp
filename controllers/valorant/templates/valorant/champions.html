@@ -2,9 +2,7 @@
 
 {% block title %}{{ name }}{% endblock %}
 {% block head %}
-	<link rel="manifest" href="{{ url_for('valorant.manifest') }}">
-	<link rel="icon" href="{{ url_for('valorant.serve_icons', team='vct') }}" type="image/png">
-	<link rel="apple-touch-icon" href="{{ url_for('valorant.serve_icons', team='vct') }}" type="image/png">
+{% include "valorant/header.html" %}
 {% endblock %}
 
 {% block content %}

@@ -1,78 +1,78 @@
 {
-    "champions": "seoul",
-    "tournament": {
-        "champions seoul": {
-            "date": ["2024-08-01", "2024-08-25"],
-            "participants":[
-                "FNC", "BLG", "DRX", "KRÜ", 
-                "GEN", "SEN", "FPX", "TH", 
-                "LEV", "TLN", "VIT", "TE", 
-                "EDG", "FUT", "G2", "PRX"
-            ],
-            "results": {
-               "group_stage": [
-                    {
-                        "opening": [
-                            {"FNC":2,"BLG":0},
-                            {"DRX":2,"KRÜ":1}
-                        ],
-                        "winners":{"FNC":0,"DRX":2},
-                        "elimination":{"BLG":0,"KRÜ":2},
-                        "decider":{"FNC":2,"KRÜ":1}
-                    },
-                    {
-                        "opening":[
-                            {"GEN":2,"SEN":0},
-                            {"FPX":1, "TH":2}
-                        ],
-                        "winners":{"GEN":1,"TH":2},
-                        "elimination":{"SEN":2,"FPX":0},
-                        "decider":{"GEN":0,"SEN":2}
-                    },
-                    {
-                        "opening":[
-                            {"LEV":2,"TLN":0},
-                            {"VIT":1,"TE":2}
-                        ],
-                        "winners":{"LEV":1,"TE":2},
-                        "elimination":{"TLN":0,"VIT":2},
-                        "decider":{"LEV":2,"VIT":0}
-                    },
-                    {
-                        "opening":[
-                            {"EDG":2,"FUT":0},
-                            {"G2":2,"PRX":0}
-                        ],
-                        "winners":{"EDG":1,"G2":2},
-                        "elimination":{"FUT":0,"PRX":2},
-                        "decider":{"EDG":2,"PRX":1}
-                    }
-                ],
-                "playoffs_stage":{
-                    "upper_quarterfinals": [
-                        {"DRX":0,"SEN":2},
-                        {"TE":0,"EDG":2},
-                        {"G2":0,"LEV":2},
-                        {"TH":2,"FNC":0}
-                    ],
-                    "upper_semifinals": [
-                        {"SEN":1,"EDG":2},
-                        {"LEV":2,"TH":0}
-                    ],
-                    "upper_final": {"EDG":2,"LEV":1},
-                    "lower_round_1": [
-                        {"DRX":2,"TE":0},
-                        {"G2":0,"FNC":2}
-                    ],
-                    "lower_round_2": [
-                        {"TH":2,"DRX":1},
-                        {"SEN":2,"FNC":1}
-                    ],
-                    "lower_semifinal": {"TH":2,"SEN":1},
-                    "lower_final": {"LEV":1,"TH":3},
-                    "grand_final": {"EDG":3,"TH":2}
-                }
-            }
-        }
-    }
+	"champions": "seoul",
+	"tournament": {
+		"champions seoul": {
+			"date": ["2024-08-01", "2024-08-25"],
+			"participants":[
+				"FNC", "BLG", "DRX", "KRÜ", 
+				"GEN", "SEN", "FPX", "TH", 
+				"LEV", "TLN", "VIT", "TE", 
+				"EDG", "FUT", "G2", "PRX"
+			],
+			"results": {
+			   "group_stage": [
+					{
+						"opening": [
+							{"FNC":2,"BLG":0},
+							{"DRX":2,"KRÜ":1}
+						],
+						"winners":{"FNC":0,"DRX":2},
+						"elimination":{"BLG":0,"KRÜ":2},
+						"decider":{"FNC":2,"KRÜ":1}
+					},
+					{
+						"opening":[
+							{"GEN":2,"SEN":0},
+							{"FPX":1, "TH":2}
+						],
+						"winners":{"GEN":1,"TH":2},
+						"elimination":{"SEN":2,"FPX":0},
+						"decider":{"GEN":0,"SEN":2}
+					},
+					{
+						"opening":[
+							{"LEV":2,"TLN":0},
+							{"VIT":1,"TE":2}
+						],
+						"winners":{"LEV":1,"TE":2},
+						"elimination":{"TLN":0,"VIT":2},
+						"decider":{"LEV":2,"VIT":0}
+					},
+					{
+						"opening":[
+							{"EDG":2,"FUT":0},
+							{"G2":2,"PRX":0}
+						],
+						"winners":{"EDG":1,"G2":2},
+						"elimination":{"FUT":0,"PRX":2},
+						"decider":{"EDG":2,"PRX":1}
+					}
+				],
+				"playoffs_stage":{
+					"upper_quarterfinals": [
+						{"DRX":0,"SEN":2},
+						{"TE":0,"EDG":2},
+						{"G2":0,"LEV":2},
+						{"TH":2,"FNC":0}
+					],
+					"upper_semifinals": [
+						{"SEN":1,"EDG":2},
+						{"LEV":2,"TH":0}
+					],
+					"upper_final": {"EDG":2,"LEV":1},
+					"lower_round_1": [
+						{"DRX":2,"TE":0},
+						{"G2":0,"FNC":2}
+					],
+					"lower_round_2": [
+						{"TH":2,"DRX":1},
+						{"SEN":2,"FNC":1}
+					],
+					"lower_semifinal": {"TH":2,"SEN":1},
+					"lower_final": {"LEV":1,"TH":3},
+					"grand_final": {"EDG":3,"TH":2}
+				}
+			}
+		}
+	}
 }

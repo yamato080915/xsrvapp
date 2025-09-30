@@ -3,7 +3,7 @@
     "short_name": "ValoInfo",
     "icons": [
         {
-           "src": "statics/vct/icons/vct.png",
+           "src": "icons/vct",
            "type": "image/png",
            "sizes": "200x200"
         }

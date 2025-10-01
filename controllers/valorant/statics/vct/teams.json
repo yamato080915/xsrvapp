@@ -17,14 +17,20 @@
 		}
 	},
 	"EMEA": {
-		"list": ["GX", "FNC", "TL", "TH", "VIT", "FUT"],
+		"list": ["GX", "FNC", "TL", "TH", "VIT", "FUT", "BBL", "KC", "MKOI", "NAVI", "M8", "APK"],
 		"names": {
 			"GX": "GIANTX",
 			"FNC": "Fnatic",
 			"TL": "Team Liquid",
 			"TH": "Team Heretics",
 			"VIT": "Team Vitality",
-			"FUT": "FUT Esports"
+			"FUT": "FUT Esports",
+			"BBL": "BBL Esports",
+			"KC": "Karmine Corp",
+			"MKOI": "Movistar KOI",
+			"NAVI": "Natus Vincere",
+			"M8": "Gentle Mates",
+			"APK": "Apeks"
 		}
 	},
 	"Americas": {

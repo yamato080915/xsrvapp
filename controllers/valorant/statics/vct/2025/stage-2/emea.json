@@ -1,0 +1,101 @@
+{
+    "year": 2025,
+    "region": "EMEA",
+    "date": ["2025-07-15","2025-09-01"],
+    "participants": [
+        "BBL","FNC","FUT","GX",
+        "KC","MKOI","NAVI","TH",
+        "TL","VIT","M8","APK"
+    ],
+    "results": {
+        "group_stage": [
+            {
+                "place": ["TH","GX","BBL","VIT","FUT","M8"],
+                "result":{
+                    "TH":{"REC":[5,0],"MAP":[10,2],"RND":[148,107]},
+                    "GX":{"REC":[3,2],"MAP":[7,6],"RND":[132,144]},
+                    "BBL":{"REC":[3,2],"MAP":[8,5],"RND":[154,133]},
+                    "VIT":{"REC":[2,3],"MAP":[5,7],"RND":[132,123]},
+                    "FUT":{"REC":[2,3],"MAP":[4,8],"RND":[113,134]},
+                    "M8":{"REC":[0,5],"MAP":[4,10],"RND":[134,172]}
+                },
+                "matches":[
+                    {"VIT":0,"GX":2},
+                    {"FUT":2,"M8":1},
+                    {"TH":2,"BBL":1},
+                    {"GX":2,"BBL":1},
+                    {"M8":1,"TH":2},
+                    {"FUT":0,"VIT":2},
+
+                    {"FUT":2,"GX":1},
+                    {"M8":0,"BBL":2},
+                    {"VIT":0,"TH":2},
+
+                    {"FUT":0,"TH":2},
+                    {"M8":1,"GX":2},
+                    {"VIT":1,"BBL":2},
+                    
+                    {"GX":0,"TH":2},
+                    {"M8":1,"VIT":2},
+                    {"FUT":0,"BBL":2}
+                ]
+            },
+            {
+                "place":["TL","FNC","NAVI","KC","MKOI","APK"],
+                "result":{
+                    "TL":{"REC":[4,1],"MAP":[9,4],"RND":[166,121]},
+                    "FNC":{"REC":[4,1],"MAP":[8,4],"RND":[139,128]},
+                    "NAVI":{"REC":[3,2],"MAP":[7,6],"RND":[147,132]},
+                    "KC":{"REC":[3,2],"MAP":[7,7],"RND":[164,152]},
+                    "MKOI":{"REC":[1,4],"MAP":[5,9],"RND":[125,162]},
+                    "APK":{"REC":[0,5],"MAP":[4,10],"RND":[122,168]}
+                },
+                "matches":[
+                    {"NAVI":2,"APK":1},
+                    {"TL":2,"MKOI":1},
+                    {"FNC":2,"KC":1},
+                    {"APK":1,"KC":2},
+                    {"TL":2,"NAVI":0},
+                    {"MKOI":0,"FNC":2},
+
+                    {"TL":2,"APK":1},
+                    {"MKOI":1,"KC":2},
+                    {"NAVI":1,"FNC":2},
+
+                    {"MKOI":2,"APK":1},
+                    {"NAVI":2,"KC":0},
+                    {"TL":2,"FNC":0},
+
+                    {"MKOI":1,"NAVI":2},
+                    {"APK":0,"FNC":2},
+                    {"TL":1,"KC":2}
+                ]
+            }
+        ],
+        "playoffs_stage": {
+            "place":["TL","GX","BBL","NAVI","TH","FNC","KC","VIT","FUT","MKOI","M8","APK"],
+            "prize":["$100000","$65000","$40000","$25000","$10000","$10000","-","-","-","-","-","-"],
+            "circuit":[11,8,7,6,5,4,3,2,2,1,0,0],
+            "opening": [
+                {"FNC":1,"BBL":2},
+                {"GX":2,"NAVI":1}
+            ],
+            "upper_semifinals": [
+                {"TH":0,"BBL":2},
+                {"TL":2,"GX":1}
+            ],
+            "upper_final": {"BBL":1,"TL":2},
+            "grand_final": {"TL":3,"GX":0},
+            "lower_round_1": [
+                {"FNC":2,"KC":1},
+                {"NAVI":2,"VIT":0}
+            ],
+            "lower_round_2": [
+                {"GX":2,"FNC":0},
+                {"TH":0,"NAVI":2}
+            ],
+            "lower_semifinal": {"GX":2,"NAVI":1},
+            "lower_final": {"BBL":0,"GX":3}
+        }
+    }
+}

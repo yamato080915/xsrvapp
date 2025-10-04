@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, make_response, send_file, abort
-from myfunc import url_for
+from myfunc import url_for, max_key, min_key
 import json, os
 
 valorant = Blueprint(
@@ -44,22 +44,42 @@ def stage2(year, region:str):
 		data = json.load(f)
 	return render_template("valorant/stage-2.html", data=data, teams=load_teams())
 
-@valorant.route("/vct/<int:year>/champions")
-def champions(year):
-	if not os.path.isdir(f"controllers/valorant/statics/vct/{year}"):
+def load_champions(filename):
+	def check(type, d:dict):
+		if type=="max":res = max_key(d)
+		else:res = min_key(d)
+		return "TBD" if res is None else res
+	if not os.path.isfile(f"controllers/valorant/statics/vct/{filename}"):
 		abort(404)
-	with open(f'controllers{url_for("valorant.static", filename=f"vct/{year}/champions.json")}', encoding="utf-8") as f:
+		return
+	with open(f"controllers/valorant/statics/vct/{filename}", encoding="utf-8") as f:
 		data = json.load(f)
 	name = f"valorant champions {data['champions']}".upper()
 	data = data["tournament"][f"champions {data['champions']}"]
-	return render_template("valorant/champions.html", name=name, tournament=data, teams=load_teams())
+	group = data["results"]["group_stage"]
+	playoffs = data["results"]["playoffs_stage"]
+	place = [
+		check("max", playoffs["grand_final"]), 
+		check("min", playoffs["grand_final"]), 
+		check("min", playoffs["lower_final"]), 
+		check("min", playoffs["lower_semifinal"])
+	]+[
+		check("min", x) for x in playoffs["lower_round_2"]
+	]+[
+		check("min", x) for x in playoffs["lower_round_1"]
+	]+[
+		check("min", x["decider"]) for x in group
+	]+[
+		check("min", x["elimination"]) for x in group
+	]
+	return name, data, place
+
+@valorant.route("/vct/<int:year>/champions")
+def champions(year):
+	name, data, place = load_champions(f"{year}/champions.json")
+	return render_template("valorant/champions.html", name=name, tournament=data, place=place, teams=load_teams())
 
 @valorant.route("/vct/<int:year>/champions/pickem")
 def pickem(year):
-	if not os.path.isfile(f"controllers/valorant/statics/vct/{year}/pick'em.json"):
-		abort(404)
-	with open(f'controllers{url_for("valorant.static", filename=f"vct/{year}/pick\'em.json")}', encoding="utf-8") as f:
-		data = json.load(f)
-	name = f"valorant champions {data['champions']}".upper()
-	data = data["tournament"][f"champions {data['champions']}"]
-	return render_template("valorant/champions.html", name=name, tournament=data, teams=load_teams())
+	name, data, place = load_champions(f"{year}/pick'em.json")
+	return render_template("valorant/champions.html", name=name, tournament=data, place=place, teams=load_teams())

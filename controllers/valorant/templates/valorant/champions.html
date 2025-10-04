@@ -12,7 +12,15 @@
 		height: auto;
 		display: block;
 		margin: 0 auto;
-	};
+	}
+	.table_icon img {
+		max-height: 20px;
+		width: auto;
+		margin: 0 auto;
+	}
+	.table th .table td {
+		vertical-align: middle;
+	}
 </style>
 <div class="container">
 	<h1 class="vct-font">{{ name }}</h1>
@@ -41,6 +49,29 @@
 </div>
 <div class="p-2">
 	<h2 class="vct-font">RESULTS</h2>
+	
+	<div class="d-flex justify-content-center">
+		<table class="table" style="max-width: 60%;">
+			<thead>
+				<tr>
+					<th scope="col" class="vct-font text-center" style="width: 10%;">PLACE</th>
+					<th scope="col" class="vct-font text-center" style="width: 10%;">PRIZE</th>
+					<th scope="col" class="vct-font text-start" style="width: 15%;">TEAM</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for i,x in enumerate(place) %}
+					<tr>
+						<th scope="row" class="vct-font text-center">{{ ["1st","2nd","3rd","4th","5th-6th","5th-6th","7th-8th","7th-8th","9th-12th","9th-12th","9th-12th","9th-12th","13th-16th","13th-16th","13th-16th","13th-16th"][i] }}</th>
+						<td class="vct-font text-center">{{ tournament.prize[i] }}</td>
+						<td class="vct-font text-start table_icon">
+							<img src="{{ url_for('valorant.serve_icons', team=x) }}" alt="{{x}} icon">
+							{% if x != "TBD" %}{{ teams[team_region(x)].names[x] }}{% else %}TBD{% endif %}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
 	<h3 class="vct-font">GROUP STAGE</h3>
 	<div class="row row-cols-1 row-cols-lg-2">
 		{% for i, group in enumerate(tournament.results.group_stage) %}

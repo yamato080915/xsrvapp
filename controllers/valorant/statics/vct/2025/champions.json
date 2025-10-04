@@ -9,6 +9,7 @@
 				"TL", "DRX", "NRG", "EDG", 
 				"G2", "TH", "DRG", "T1"
 			],
+			"prize": ["$1000000","$400000","$250000","$130000","$85000","$85000","$50000","$50000","$30000","$30000","$30000","$30000","$20000","$20000","$20000","$20000"],
 			"results": {
 				"group_stage": [
 					{
@@ -59,7 +60,7 @@
 						{"FNC":2,"PRX":1},
 						{"MIBR":1,"NRG":2}
 					],
-					"upper_final": {"FNC":null,"NRG":null},
+					"upper_final": {"FNC":0,"NRG":2},
 					"lower_round_1": [
 						{"DRX":2,"G2":1},
 						{"TH":2,"GX":1}
@@ -68,9 +69,9 @@
 						{"MIBR":1,"DRX":2},
 						{"PRX":2,"TH":1}
 					],
-					"lower_semifinal": {"DRX":null,"PRX":null},
-					"lower_final": {},
-					"grand_final": {}
+					"lower_semifinal": {"DRX":2,"PRX":0},
+					"lower_final": {"FNC":null,"DRX":null},
+					"grand_final": {"NRG":null,"TBD":null}
 				}
 			}
 		}

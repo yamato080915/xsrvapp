@@ -36,7 +36,7 @@ login_manager.init_app(app)
 
 mail = Mail(app)
 
-from myfunc import url_for, get_username, format_datetime, keys, values, enmrt, max_key
+from myfunc import url_for, get_username, format_datetime, keys, values, enmrt, max_key, min_key, team_region
 app.jinja_env.globals["url_for"] = url_for
 app.jinja_env.globals["get_username"] = get_username
 app.jinja_env.globals["format_datetime"] = format_datetime
@@ -44,5 +44,7 @@ app.jinja_env.globals["keys"] = keys
 app.jinja_env.globals["values"] = values
 app.jinja_env.globals["enumerate"] = enmrt
 app.jinja_env.globals["max_key"] = max_key
+app.jinja_env.globals["min_key"] = min_key
+app.jinja_env.globals["team_region"] = team_region
 
 import www

@@ -2,6 +2,7 @@ from flask import abort, url_for as flask_url_for
 from flask_login import current_user
 from functools import wraps
 from datetime import datetime
+import json
 
 from models import User
 
@@ -37,5 +38,15 @@ def values(d:dict):
 def max_key(d:dict):
 	return None if None in d.values() or d=={} else max(d, key=d.get)
 
+def min_key(d:dict):
+	return None if None in d.values() or d=={} else min(d, key=d.get)
+
 def enmrt(list):
 	return enumerate(list)
+
+def team_region(team):
+	with open('controllers/valorant/statics/vct/teams.json', encoding="utf-8") as f:
+		teams = json.load(f)
+	if team == "TBD":
+		return "TBD"
+	return "Pacific" if team in teams["Pacific"]["list"] else "EMEA" if team in teams["EMEA"]["list"] else "Americas" if team in teams["Americas"]["list"] else "China" if team in teams["China"]["list"] else None

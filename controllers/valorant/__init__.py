@@ -79,7 +79,9 @@ def champions(year):
 	name, data, place = load_champions(f"{year}/champions.json")
 	return render_template("valorant/champions.html", name=name, tournament=data, place=place, teams=load_teams())
 
+"""
 @valorant.route("/vct/<int:year>/champions/pickem")
 def pickem(year):
 	name, data, place = load_champions(f"{year}/pick'em.json")
 	return render_template("valorant/champions.html", name=name, tournament=data, place=place, teams=load_teams())
+"""

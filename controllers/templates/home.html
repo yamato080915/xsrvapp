@@ -70,9 +70,10 @@
 							</div>
 							<a href="https://atcoder.jp/contests/{{ atcoder[-1]['ContestScreenName'].split('.')[0] }}/standings?watching=Yamato0915" id="atcoder-a" class="stretched-link"></a>
 						</div>
-						<div class="ratio ratio-16x9">
+						<div class="ratio ratio-16x9 pb-2">
 							<canvas class="mt-3" id="ratingChart" width="800" height="450"></canvas>
 						</div>
+						<a href="{{ url_for('home.AtcoderHistory') }}">[コンテスト成績表]</a>
 					</div>
 				</div>
 			</div>
@@ -95,7 +96,8 @@
 							</div>
 							<a href="https://onlinemathcontest.com/contests/{{ omc[-1]['ContestScreenName'].split('.')[0] }}" id="omc-a" class="stretched-link"></a>
 						</div>
-						<div class="ratio ratio-16x9"><canvas class="mt-3" id="omcRating" width="800" height="450"></canvas></div>
+						<div class="ratio ratio-16x9 pb-2"><canvas class="mt-3" id="omcRating" width="800" height="450"></canvas></div>
+						<a href="{{ url_for('home.OmcHistory') }}">[コンテスト成績表]</a>
 					</div>
 				</div>
 			</div>

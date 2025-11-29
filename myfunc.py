@@ -26,6 +26,16 @@ def get_username(user:int):
 def format_datetime(date:datetime):
 	return date.strftime("%Y/%m/%d %H:%M")
 
+def rank(rating:int):
+	if rating<400:return "gray"
+	elif rating<800:return "brown"
+	elif rating<1200:return "green"
+	elif rating<1600:return "cyan"
+	elif rating<2000:return "blue"
+	elif rating<2400:return "yellow"
+	elif rating<2800:return "orange"
+	else:return "red"
+
 def keys(d:dict):
 	li = list(d.keys())
 	if len(li)<=1:

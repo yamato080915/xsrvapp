@@ -38,6 +38,16 @@ def index():
 	omc = get("./omc.json")
 	return render_template("home.html", atcoder=atcoder, omc=omc)
 
+@home.route("/algo/history")
+def AtcoderHistory():
+	data = reversed(get("./atcoder.json"))
+	return render_template("history.html", type="AtCoder", data=data)
+
+@home.route("/omc/history")
+def OmcHistory():
+	data = reversed(get("./omc.json"))
+	return render_template("history.html", type="OMC", data=data)
+
 @home.route("/api/atcoder/rating")
 def AtcoderRating():
 	data = get("./atcoder.json")

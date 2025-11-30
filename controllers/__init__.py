@@ -20,6 +20,7 @@ def get(file):
 		i["Place"] = str(i["Place"])
 		dt = datetime.fromisoformat(i["EndTime"])
 		i["EndTime"] = f"{dt.year}/{dt.month}/{dt.day}"
+		i["Day"] = dt.strftime(f"%Y-%m-%d({['月', '火', '水', '木', '金', '土', '日'][dt.weekday()]}) %H:%M")
 		if i["NewRating"]<400:i["Rank"]="gray"
 		elif i["NewRating"]<800:i["Rank"]="brown"
 		elif i["NewRating"]<1200:i["Rank"]="green"

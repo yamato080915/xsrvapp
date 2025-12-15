@@ -24,3 +24,4 @@ omc.py
 omc.json
 controllers/valorant/statics/vct/icons/
 controllers/valorant/statics/vct/2025/pick'em.json
+*.cmd

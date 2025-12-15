@@ -34,25 +34,37 @@
 		}
 	},
 	"Americas": {
-		"list": ["SEN", "MIBR", "NRG", "G2", "LEV", "KRÜ"],
+		"list": ["SEN", "MIBR", "NRG", "G2", "LEV", "KRÜ", "100T", "C9", "EG", "FUR", "LOUD", "2G"],
 		"names": {
 			"SEN": "Sentinels",
 			"MIBR": "Made in Brazil",
 			"NRG": "NRG",
 			"G2": "G2 Esports",
 			"LEV": "LEVIATÁN",
-			"KRÜ": "KRÜ Esports"
+			"KRÜ": "KRÜ Esports",
+			"100T": "100 Thieves",
+			"C9": "Cloud9",
+			"EG": "Evil Geniuses",
+			"FUR": "FURIA Esports",
+			"LOUD": "LOUD",
+			"2G": "2Game Esports"
 		}
 	},
 	"China": {
-		"list": ["XLG", "BLG", "EDG", "DRG", "FPX", "TE"],
+		"list": ["XLG", "BLG", "EDG", "DRG", "FPX", "TE", "AG", "JDG", "NOVA", "TEC", "TYL", "WOL"],
 		"names": {
 			"XLG": "Xi Lai Gaming",
 			"BLG": "Bilibili Gaming",
 			"EDG": "EDward Gaming",
 			"DRG": "Dragon Ranger Gaming",
 			"FPX": "FunPlus Phoenix",
-			"TE": "Trace Esports"
+			"TE": "Trace Esports",
+			"AG": "All Gamers",
+			"JDG": "JD Mall JDG Esports",
+			"NOVA": "Nova Esports",
+			"TEC": "Titan Esports Club",
+			"TYL": "TYLOO Esports",
+			"WOL": "Wolves Esports"
 		}
 	}
 }

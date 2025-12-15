@@ -1,0 +1,101 @@
+{
+    "year": 2025,
+    "region": "China",
+    "date": ["2025-07-04","2025-08-25"],
+    "participants": [
+		"AG", "BLG", "EDG", "FPX",
+		"JDG", "NOVA", "TEC", "TE",
+		"TYL", "WOL", "DRG", "XLG"
+    ],
+    "results": {
+        "group_stage": [
+            {
+                "place": ["XLG", "EDG", "TYL", "TE", "JDG", "TEC"],
+                "result":{
+                    "XLG":{"REC":[4,1],"MAP":[9,3],"RND":[151,110]},
+                    "EDG":{"REC":[4,2],"MAP":[7,5],"RND":[131,127]},
+                    "TYL":{"REC":[3,2],"MAP":[6,5],"RND":[118,105]},
+                    "TE":{"REC":[3,2],"MAP":[6,7],"RND":[134,132]},
+                    "JDG":{"REC":[1,4],"MAP":[6,9],"RND":[137,171]},
+                    "TEC":{"REC":[1,4],"MAP":[3,8],"RND":[103,129]}
+                },
+                "matches":[
+                    {"EDG":2,"TEC":0},
+                    {"BLG":2,"TYL":0},
+                    {"JDG":1,"TE":2},
+                    {"TE":0,"TYL":2},
+                    {"JDG":1,"BLG":2},
+                    {"TYL":2,"TEC":0},
+
+                    {"TE":2,"EDG":1},
+                    {"TEC":0,"BLG":2},
+                    {"TYL":0,"EDG":2},
+
+                    {"TEC":1,"JDG":2},
+                    {"BLG":1,"TE":2},
+                    {"EDG":2,"JDG":1},
+                    
+                    {"TE":0,"TEC":2},
+                    {"TYL":2,"JDG":1},
+                    {"BLG":2,"EDG":0}
+                ]
+            },
+            {
+                "place":["XLG", "AG", "DRG", "FPX", "NOVA", "WOL"],
+                "result":{
+                    "XLG":{"REC":[4,1],"MAP":[9,3],"RND":[133,103]},
+                    "AG":{"REC":[3,2],"MAP":[8,5],"RND":[142,114]},
+                    "DRG":{"REC":[3,2],"MAP":[8,7],"RND":[165,152]},
+                    "FPX":{"REC":[3,2],"MAP":[6,6],"RND":[130,124]},
+                    "NOVA":{"REC":[1,4],"MAP":[5,9],"RND":[135,164]},
+                    "WOL":{"REC":[1,4],"MAP":[3,9],"RND":[105,153]}
+                },
+                "matches":[
+					{"AG":1,"XLG":2},
+					{"WOL":0,"FPX":2},
+					{"DRG":2,"NOVA":1},
+					{"FPX":2,"NOVA":1},
+					{"AG":2,"WOL":0},
+					{"DRG":2,"AG":1},
+
+					{"XLG":2,"WOL":0},
+					{"FPX":2,"DRG":1},
+					{"NOVA":1,"AG":2},
+					
+					{"WOL":2,"DRG":1},
+					{"XLG":2,"FPX":0},
+					{"NOVA":0,"XLG":2},
+
+					{"AG":2,"FPX":0},
+					{"NOVA":2,"WOL":1},
+					{"DRG":2,"XLG":1}
+                ]
+            }
+        ],
+        "playoffs_stage": {
+            "place":["BLG", "DRG", "EDG", "XLG", "AG", "TYL", "TE", "FPX", "JDG", "NOVA", "TEC", "WOL"],
+            "prize":["-","-","-","-","-","-","-","-","-","-","-","-"],
+            "circuit":[11,8,7,7,4,3,3,3,1,1,1,1],
+            "opening": [
+				{"EDG":0,"DRG":2},
+				{"AG":0,"TYL":2}
+            ],
+            "upper_semifinals": [
+				{"XLG":1,"DRG":2},
+				{"BLG":2,"TYL":1}
+            ],
+            "upper_final": {"DRG":2,"BLG":1},
+            "grand_final": {"DRG":1,"BLG":3},
+            "lower_round_1": [
+				{"EDG":2,"TE":1},
+				{"AG":2,"FPX":1}
+            ],
+            "lower_round_2": [
+				{"TYL":0,"EDG":2},
+				{"XLG":2,"AG":1}
+            ],
+            "lower_semifinal": {"EDG":2,"XLG":0},
+            "lower_final": {"BLG":3,"EDG":1}
+        }
+    }
+}

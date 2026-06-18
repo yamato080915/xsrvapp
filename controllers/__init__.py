@@ -6,7 +6,7 @@ from datetime import datetime
 from models import User, MathProblems, Submissions, Question, Event, Answer
 from app import db
 
-home = Blueprint("home", __name__, static_folder="static", template_folder="templates")
+home = Blueprint("home", __name__, static_folder="statics", template_folder="templates")
 
 from myfunc import admin_required
 

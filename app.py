@@ -3,11 +3,13 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_mail import Mail
+from flask_cors import CORS
 
 import os, json
 
 app = Flask(__name__)
 app.json.ensure_ascii = False
+CORS(app)
 
 from config import main
 app.config.from_object(main)

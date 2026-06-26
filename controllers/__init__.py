@@ -3,7 +3,7 @@ from myfunc import url_for
 import json
 from datetime import datetime
 
-from models import User, MathProblems, Submissions, Question, Event, Answer
+from models import User, MathProblems, Submissions
 from app import db
 
 home = Blueprint("home", __name__, static_folder="statics", template_folder="templates")
@@ -66,12 +66,6 @@ def get_database(table, id=None, dict=True):
 		TABLE = MathProblems
 	elif table=="submissions":
 		TABLE = Submissions
-	elif table=="question":
-		TABLE = Question
-	elif table=="event":
-		TABLE = Event
-	elif table=="answer":
-		TABLE = Answer
 	else:
 		abort(404)
 	if id is not None:

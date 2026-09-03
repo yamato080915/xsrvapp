@@ -13,7 +13,7 @@ CORS(app, resources={
 	r"/api/valorant/team-shuffle/.*": {
 		"origins": [
 			origin.strip() for origin in os.getenv(
-				"TEAM_SHUFFLE_ALLOWED_ORIGINS", "https://yamato080915.github.io"
+				"TEAM_SHUFFLE_ALLOWED_ORIGINS", "https://yamato080915.github.io,https://localhost:4000"
 			).split(",") if origin.strip()
 		],
 		"methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],

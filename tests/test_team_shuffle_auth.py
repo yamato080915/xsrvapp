@@ -64,8 +64,9 @@ class TeamShuffleAuthTest(unittest.TestCase):
                                 method=method, headers=headers, **kwargs)
 
     def test_standard_header_still_works(self):
-        self.assertEqual(self.call("GET", "/participants", self.owner,
-                                   header="Authorization").status_code, 200)
+        response = self.call("GET", "/participants", self.owner, header="Authorization")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.headers.get("Cache-Control"), "no-store")
 
     def test_missing_standard_header_uses_custom_header(self):
         self.assertEqual(self.call("GET", "/participants", self.owner).status_code, 200)
@@ -135,6 +136,7 @@ class TeamShuffleAuthTest(unittest.TestCase):
             allowed = response.headers.get("Access-Control-Allow-Headers", "").lower()
             self.assertIn("authorization", allowed)
             self.assertIn("x-team-shuffle-authorization", allowed)
+            self.assertEqual(response.headers.get("Access-Control-Max-Age"), "600")
             self.assertNotIn("Access-Control-Allow-Credentials", response.headers)
         denied = self.call("OPTIONS", "/registration", headers={
             "Origin": "https://untrusted.example",
@@ -146,4 +148,3 @@ class TeamShuffleAuthTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

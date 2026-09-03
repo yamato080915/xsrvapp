@@ -18,6 +18,7 @@ CORS(app, resources={
 		],
 		"methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
 		"allow_headers": ["Content-Type", "Authorization", "X-Team-Shuffle-Authorization"],
+		"max_age": 600,
 		"supports_credentials": False
 	},
 	r"/.*": {"origins": "*"}

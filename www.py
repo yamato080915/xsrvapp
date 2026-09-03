@@ -18,6 +18,9 @@ app.register_blueprint(math, url_prefix="/math")
 from controllers.valorant import valorant
 app.register_blueprint(valorant, url_prefix="/valorant")
 
+from controllers.valorant.team_shuffle import team_shuffle
+app.register_blueprint(team_shuffle, url_prefix="/api/valorant/team-shuffle")
+
 login_manager.blueprint_login_views = {
 	"home": "account.login",
 	"account": "login",

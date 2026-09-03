@@ -1,4 +1,5 @@
-from datetime import datetime
+from datetime import datetime, timezone
+import time
 from app import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
@@ -115,4 +116,55 @@ class Submissions(db.Model):
 			"score": "text",
 			"judged": "text",
 			"comment": "textarea"
+		}
+
+
+class ShuffleRoom(db.Model):
+	__tablename__ = "shuffle_rooms"
+	id = db.Column(db.String(36), primary_key=True)
+	organizer_hash = db.Column(db.String(64), nullable=False)
+	expires_at = db.Column(db.BigInteger, nullable=False)
+	closed = db.Column(db.Boolean, nullable=False, default=False)
+	revision = db.Column(db.Integer, nullable=False, default=0)
+	last_operation_id = db.Column(db.String(36))
+	last_operation_hash = db.Column(db.String(64))
+
+	def to_dict(self):
+		status = "closed" if self.closed else (
+			"expired" if self.expires_at <= time.time() else "open"
+		)
+		return {
+			"id": self.id,
+			"status": status,
+			"expiresAt": datetime.fromtimestamp(self.expires_at, timezone.utc).isoformat(),
+			"revision": self.revision,
+			"lastOperationId": self.last_operation_id
+		}
+
+
+class ShuffleParticipant(db.Model):
+	__tablename__ = "shuffle_participants"
+	id = db.Column(db.String(36), primary_key=True)
+	room_id = db.Column(db.String(36), db.ForeignKey("shuffle_rooms.id"), nullable=False, index=True)
+	token_hash = db.Column(db.String(64), nullable=False)
+	name = db.Column(db.String(80), nullable=False)
+	tier = db.Column(db.String(16), nullable=False)
+	div = db.Column(db.Integer, nullable=False)
+	vc = db.Column(db.Boolean, nullable=False)
+	edit_locked = db.Column(db.Boolean, nullable=False, default=False)
+	removed = db.Column(db.Boolean, nullable=False, default=False)
+	version = db.Column(db.Integer, nullable=False, default=1)
+	__table_args__ = (
+		db.UniqueConstraint("room_id", "token_hash", name="uq_shuffle_participant_identity"),
+	)
+
+	def to_dict(self):
+		return {
+			"id": self.id,
+			"name": self.name,
+			"tier": self.tier,
+			"div": self.div,
+			"vc": self.vc,
+			"editLocked": self.edit_locked,
+			"version": self.version
 		}

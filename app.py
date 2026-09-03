@@ -9,7 +9,19 @@ import os, json
 
 app = Flask(__name__)
 app.json.ensure_ascii = False
-CORS(app)
+CORS(app, resources={
+	r"/api/valorant/team-shuffle/.*": {
+		"origins": [
+			origin.strip() for origin in os.getenv(
+				"TEAM_SHUFFLE_ALLOWED_ORIGINS", "https://yamato080915.github.io"
+			).split(",") if origin.strip()
+		],
+		"methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+		"allow_headers": ["Content-Type", "Authorization"],
+		"supports_credentials": False
+	},
+	r"/.*": {"origins": "*"}
+})
 
 from config import main
 app.config.from_object(main)

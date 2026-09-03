@@ -67,10 +67,18 @@ def token_hash(value):
 
 
 def bearer():
-	header = request.headers.get("Authorization", "")
-	if not header.startswith("Bearer "):
+	# CGI等で標準ヘッダーが渡らない場合も、同じBearer秘密キーを検証する。
+	headers = [value for value in (
+		request.headers.get("Authorization"),
+		request.headers.get("X-Team-Shuffle-Authorization"),
+		request.environ.get("REDIRECT_HTTP_AUTHORIZATION"),
+	) if value is not None]
+	if not headers or any(not value.startswith("Bearer ") for value in headers):
 		raise Problem("認証が必要です。", 401, "unauthorized")
-	return token_hash(header[7:])
+	identities = [token_hash(value[7:]) for value in headers]
+	if any(not hmac.compare_digest(identities[0], value) for value in identities[1:]):
+		raise Problem("認証情報が一致しません。", 401, "unauthorized")
+	return identities[0]
 
 
 def body():

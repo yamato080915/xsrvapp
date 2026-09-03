@@ -17,7 +17,7 @@ CORS(app, resources={
 			).split(",") if origin.strip()
 		],
 		"methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-		"allow_headers": ["Content-Type", "Authorization"],
+		"allow_headers": ["Content-Type", "Authorization", "X-Team-Shuffle-Authorization"],
 		"supports_credentials": False
 	},
 	r"/.*": {"origins": "*"}

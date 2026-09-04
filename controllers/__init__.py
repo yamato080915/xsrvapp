@@ -139,3 +139,11 @@ def deleter(tablename, id):
 	db.session.delete(data)
 	db.session.commit()
 	return redirect(url_for("home.database", tablename=tablename))
+
+@home.route("/db/shuffle/all-delete")
+@admin_required
+def shuffle_all_delete():
+	db.session.query(ShuffleParticipant).delete(synchronize_session=False)
+	db.session.query(ShuffleRoom).delete(synchronize_session=False)
+	db.session.commit()
+	return redirect(url_for("home.database", tablename="shuffleroom"))

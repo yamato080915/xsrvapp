@@ -73,11 +73,16 @@ def get_database(table, id=None, dict=True):
 	else:
 		abort(404)
 	if id is not None:
-		record = db.session.query(TABLE).get(id)
+		if TABLE in (User, MathProblems, Submissions):
+			try:
+				id = int(id)
+			except (TypeError, ValueError):
+				abort(404)
+		record = db.session.get(TABLE, id)
 		if record is None:
 			abort(404)
 		if dict:
-			return [record.to_dict(), record.data_type()]
+			return [record.to_dict(), record.data_type() if hasattr(record, "data_type") else {}]
 		else:
 			return record
 	else:
@@ -105,15 +110,17 @@ def database(tablename):
 	data = get_database(tablename.lower())
 	return jsonify(data)
 
-@home.route("/db/<tablename>/<int:id>")
+@home.route("/db/<tablename>/<id>")
 @admin_required
 def database_id(tablename, id):
 	data = get_database(tablename.lower(), id)[0]
 	return jsonify(data)
 
-@home.route("/db/<tablename>/<int:id>/update", methods=["GET", "POST"])
+@home.route("/db/<tablename>/<id>/update", methods=["GET", "POST"])
 @admin_required
 def updater(tablename, id):
+	if tablename.lower() in ("shuffleroom", "shuffleparticipant"):
+		abort(405)
 	if request.method=="GET":
 		data = get_database(tablename.lower(), id)
 		return render_template("update.html", data=data[0], keys=list(data[0].keys()), data_type=data[1])
@@ -121,10 +128,14 @@ def updater(tablename, id):
 		data = update_database(tablename.lower(), id, request.form)
 		return ""
 
-@home.route("/db/<tablename>/<int:id>/delete")
+@home.route("/db/<tablename>/<id>/delete")
 @admin_required
 def deleter(tablename, id):
 	data = get_database(tablename.lower(), id, False)
+	if isinstance(data, ShuffleRoom):
+		db.session.query(ShuffleParticipant).filter(
+			ShuffleParticipant.room_id == data.id
+		).delete(synchronize_session=False)
 	db.session.delete(data)
 	db.session.commit()
 	return redirect(url_for("home.database", tablename=tablename))

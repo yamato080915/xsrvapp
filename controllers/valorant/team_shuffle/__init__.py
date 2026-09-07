@@ -136,11 +136,14 @@ def own_participant(room, identity):
 
 def registration(room, p):
 	info = room_dict(room)
+	# 削除済みの本人トークンは、受付中なら新規参加と同じ状態として扱う。
+	# 行とIDは再利用し、PUT時に復活させる。
+	visible = None if p and p.removed else p
 	reason = info["status"] if info["status"] != "open" else (
-		"removed" if p and p.removed else
-		"locked" if p and p.edit_locked else None)
+		"locked" if visible and visible.edit_locked else None)
 	public_room = {key: info[key] for key in ("id", "status", "expiresAt")}
-	return dict(room=public_room, participant=participant_dict(p) if p else None,
+	return dict(room=public_room,
+				participant=participant_dict(visible) if visible else None,
 				editable=reason is None, reason=reason)
 
 
@@ -192,7 +195,6 @@ def register(room_id):
 		messages = {
 			"closed": "募集は終了しました。",
 			"expired": "募集の有効期限が切れました。",
-			"removed": "削除・退出済みの登録は変更できません。",
 			"locked": "チーム分けが確定したため、情報を修正できません。",
 		}
 		raise Problem(messages[state["reason"]], 409, state["reason"])
@@ -208,6 +210,13 @@ def register(room_id):
 		p = ShuffleParticipant(id=str(uuid4()), room_id=room.id,
 							   token_hash=identity, **values)
 		db.session.add(p)
+		room.revision += 1
+	elif p.removed:
+		for key, value in values.items():
+			setattr(p, key, value)
+		p.removed = False
+		p.edit_locked = False
+		p.version += 1
 		room.revision += 1
 	elif any(getattr(p, key) != value for key, value in values.items()):
 		for key, value in values.items():
